@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"showboard","l":"BoardFrame"},{"p":"showboard","l":"IBoard"},{"p":"showboard","l":"IPawn"},{"p":"showboard","l":"ISquare"}]

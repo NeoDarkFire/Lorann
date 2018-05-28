@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"model.dao","l":"AbstractDAO"},{"p":"model.dao","l":"ExampleDAO"},{"p":"model","l":"ModelFacade"}]
