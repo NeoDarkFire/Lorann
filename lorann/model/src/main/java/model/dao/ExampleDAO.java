@@ -24,7 +24,7 @@ public abstract class ExampleDAO extends AbstractDAO {
 
     /** The sql all examples. */
     private static String sqlAllExamples   = "{call findAllExamples()}";
-
+    
     /** The id column index. */
     private static int    idColumnIndex    = 1;
 
@@ -98,4 +98,5 @@ public abstract class ExampleDAO extends AbstractDAO {
         }
         return examples;
     }
+    
 }

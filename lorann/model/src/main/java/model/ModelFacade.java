@@ -46,5 +46,5 @@ public final class ModelFacade implements IModel {
     public List<Example> getAllExamples() throws SQLException {
         return ExampleDAO.getAllExamples();
     }
-
+    
 }
