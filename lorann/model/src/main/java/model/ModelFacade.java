@@ -19,12 +19,6 @@ public final class ModelFacade implements IModel {
         super();
     }
 
-<<<<<<< HEAD
-	@Override
-	public List<Example> getAllExamples() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public ILevel getLevelByID(int id) {
@@ -32,21 +26,10 @@ public final class ModelFacade implements IModel {
 		return null;
 	}
 
-=======
->>>>>>> refs/heads/master
 	@Override
 	public void saveFromFile(File file) {
 		// TODO Auto-generated method stub
 		
 	}
-<<<<<<< HEAD
-	
-=======
 
-	@Override
-	public ILevel getLevelByID(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
->>>>>>> refs/heads/master
 }
