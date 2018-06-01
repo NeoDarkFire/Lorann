@@ -19,6 +19,12 @@ public class ControllerFacade implements IController {
 
     /** The model. */
     private final IModel model;
+    
+    /** The engine. */
+    private final Engine engine;
+    
+    /** The level. */
+    private final Ilevel level;
 
     /**
      * Instantiates a new controller facade.
@@ -70,5 +76,13 @@ public class ControllerFacade implements IController {
      */
     public IModel getModel() {
         return this.model;
+    }
+    
+    public Ilevel getCurrentLevel() {
+    	return this.level;
+    }
+    
+    public void nexLevel() {
+    	
     }
 }
