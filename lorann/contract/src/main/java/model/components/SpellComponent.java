@@ -1,5 +1,7 @@
 package model.components;
 
-public class SpellComponent extends Component {
+import ecs.Component;
+
+public class SpellComponent implements Component {
 
 }

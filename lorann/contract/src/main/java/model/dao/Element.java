@@ -23,5 +23,4 @@ public class Element {
 		this.symbol = symbol;
 	}
 	
-
 }

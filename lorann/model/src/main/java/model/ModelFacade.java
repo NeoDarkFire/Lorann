@@ -1,5 +1,6 @@
 package model;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -20,31 +21,22 @@ public final class ModelFacade implements IModel {
         super();
     }
 
-    /*
-     * (non-Javadoc)
-     * @see model.IModel#getExampleById(int)
-     */
-    @Override
-    public Example getExampleById(final int id) throws SQLException {
-        return ExampleDAO.getExampleById(id);
-    }
+	@Override
+	public List<Example> getAllExamples() throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see model.IModel#getExampleByName(java.lang.String)
-     */
-    @Override
-    public Example getExampleByName(final String name) throws SQLException {
-        return ExampleDAO.getExampleByName(name);
-    }
+	@Override
+	public ILevel getLevelByID(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see model.IModel#getAllExamples()
-     */
-    @Override
-    public List<Example> getAllExamples() throws SQLException {
-        return ExampleDAO.getAllExamples();
-    }
-    
+	@Override
+	public void saveFromFile(File file) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

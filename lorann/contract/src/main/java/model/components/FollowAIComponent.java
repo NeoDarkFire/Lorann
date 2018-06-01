@@ -1,5 +1,7 @@
 package model.components;
 
-public class FollowAIComponent extends Component {
+import ecs.Component;
+
+public class FollowAIComponent implements Component {
 
 }

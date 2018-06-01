@@ -1,6 +1,9 @@
 package model.components;
 
-public class SpellAIComponent extends Component {
+import ecs.Component;
+import ecs.Entity;
+
+public class SpellAIComponent implements Component {
 	
 	public Entity owner;
 

@@ -1,5 +1,7 @@
 package model.components;
 
-public class ExitComponent extends Component {
+import ecs.Component;
+
+public class ExitComponent implements Component {
 
 }

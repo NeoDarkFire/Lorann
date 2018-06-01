@@ -1,5 +1,7 @@
 package model.components;
 
-public class InputComponent extends Component {
+import ecs.Component;
+
+public class InputComponent implements Component {
 
 }
