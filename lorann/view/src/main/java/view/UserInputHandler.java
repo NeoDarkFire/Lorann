@@ -18,7 +18,7 @@ public class UserInputHandler implements InputHandler{
 	}
 	
 	public Direction getInputDirection() {
-		
+		return null;
 	}
 	
 	/**
@@ -31,7 +31,7 @@ public class UserInputHandler implements InputHandler{
 	 */
 	
 	public boolean isPressed(Action input) {
-		
+		return false;
 	}
 	
 	/**
@@ -44,7 +44,7 @@ public class UserInputHandler implements InputHandler{
 	 */
 	
 	public boolean isReleased(Action input) {
-		
+		return false;
 	}
 	
 	

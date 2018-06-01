@@ -27,7 +27,7 @@ public class UserInputHandlerTest {
 		this.handler.press(Action.UP);
 		this.handler.press(Action.LEFT);
 		assertEquals(this.handler.getInputDirection(), Direction.UL);
-	}
+		sys.out.println("sucepute") ;
 	
 	@Test
 	public void testIsPressed() {

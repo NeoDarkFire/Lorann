@@ -65,7 +65,7 @@ public class ViewFacade implements IView {
 	 * 
 	 */
     public boolean isPressed(Action input) {
-    	
+    	return false;
     }
     
     
@@ -78,7 +78,7 @@ public class ViewFacade implements IView {
 	 * 
 	 */
     public boolean isReleased(Action input) {
-    	
+    	return false;
     }
     
     
@@ -87,7 +87,7 @@ public class ViewFacade implements IView {
 	 * 
 	 */
     public Direction getInputDirection() {
-    	
+    	return null;
     }
     
     public void refresh() {

@@ -60,6 +60,7 @@ public class Renderer {
 	}
 	
 	public BoardFrame getFrame() {
+		return null;
 		
 	}
 	
