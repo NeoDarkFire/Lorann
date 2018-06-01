@@ -21,6 +21,14 @@ public final class ModelFacade implements IModel {
         super();
     }
 
+<<<<<<< HEAD
+=======
+	@Override
+	public List<Example> getAllExamples() throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+>>>>>>> refs/heads/master
 
 	@Override
 	public ILevel getLevelByID(int id) {
@@ -33,5 +41,9 @@ public final class ModelFacade implements IModel {
 		// TODO Auto-generated method stub
 		
 	}
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> refs/heads/master
 }

@@ -3,11 +3,12 @@ package view;
 import java.awt.Image;
 import java.awt.Point;
 
+import ecs.Entity;
 import showboard.IPawn;
 import model.components.*;
 
 /**
- * <h1>The Class Sprite uses the "showboard" to recover differents information about the position and the image.</h1>
+ * <h1>The Class Sprite uses the "showboard" to recover different informations about the position and the image.</h1>
  *
  * 
  * @version 1.0
@@ -24,31 +25,25 @@ public class Sprite implements IPawn {
 
 	@Override
 	public Image getImage() {
-		// TODO Auto-generated method stub
-		return this.entity.get(DrawableComponent.class).image;
+		final DrawableComponent comp = (DrawableComponent) this.entity.get(DrawableComponent.class);
+		return comp.image;
 	}
 
 	@Override
 	public int getX() {
-		// TODO Auto-generated method stub
-		return this.entity.get(PositionComponent.class).x;
+		final PositionComponent comp = (PositionComponent) this.entity.get(PositionComponent.class);
+		return (int) comp.pos.getX();
 	}
 
 	@Override
 	public int getY() {
-		// TODO Auto-generated method stub
-		return this.entity.get(PositionComponent.class).y;
+		final PositionComponent comp = (PositionComponent) this.entity.get(PositionComponent.class);
+		return (int) comp.pos.getY();
 	}
 
 	@Override
 	public Point getPosition() {
-		// TODO Auto-generated method stub
 		return new Point(this.getX(),this.getY());
 	}
 	
-	
-	
-	
-	
-
 }

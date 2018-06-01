@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+import ecs.Entity;
+
 public interface ILevel {
 	
 	public int getWidth();

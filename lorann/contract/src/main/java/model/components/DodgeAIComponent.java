@@ -1,5 +1,7 @@
 package model.components;
 
-public class DodgeAIComponent extends Component {
+import ecs.Component;
+
+public class DodgeAIComponent implements Component {
 
 }

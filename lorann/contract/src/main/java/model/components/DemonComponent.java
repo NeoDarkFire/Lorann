@@ -1,5 +1,7 @@
 package model.components;
 
-public class DemonComponent extends Component {
+import ecs.Component;
+
+public class DemonComponent implements Component {
 
 }

@@ -1,5 +1,7 @@
 package model.components;
 
-public class TowerAIComponent extends Component {
+import ecs.Component;
+
+public class TowerAIComponent implements Component {
 
 }

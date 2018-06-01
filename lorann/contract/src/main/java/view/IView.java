@@ -1,5 +1,6 @@
 package view;
 
+import ecs.Entity;
 import model.Direction;
 import model.ILevel;
 
