@@ -1,5 +1,8 @@
 package controller;
 
+import model.IModel;
+import view.IView;
+
 /**
  * <h1>The Interface IController.</h1>
  * 
@@ -7,5 +10,9 @@ package controller;
  * @version 1.0
  */
 public interface IController {
+	
+	public void start();
+	public IView getView();
+	public IModel getModel();
 
 }

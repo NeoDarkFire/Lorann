@@ -1,5 +1,8 @@
 package view;
 
+import model.Direction;
+import model.ILevel;
+
 /**
  * <h1>The Interface IView.</h1>
  *
@@ -15,4 +18,13 @@ public interface IView {
      *            the message
      */
     void displayMessage(String message);
+    
+    public void addSprite(Entity entity);
+    public void removeSprite(Entity entity);
+    public void displayLevel(ILevel level);
+    public boolean isPressed(Action input);
+    public boolean isReleased(Action input);
+    public Direction getInputDirection();
+    public void refresh();
+    
 }

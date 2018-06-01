@@ -1,5 +1,6 @@
 package model;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -40,6 +41,13 @@ public interface IModel {
      * @throws SQLException
      *             the SQL exception
      */
+<<<<<<< HEAD
 //    List<Example> getAllExamples() throws SQLException;
+=======
+    List<Example> getAllExamples() throws SQLException;
+    
+    public ILevel getLevelByID(int id);
+    public void saveFromFile(File file);
+>>>>>>> refs/remotes/origin/master
 
 }

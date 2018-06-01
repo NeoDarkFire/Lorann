@@ -1,7 +1,0 @@
-view\IView.class
-model\dao\Map.class
-model\Example.class
-model\IModel.class
-model\dao\Tile.class
-controller\IController.class
-model\dao\Element.class
