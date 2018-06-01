@@ -25,25 +25,25 @@ public class MovementTest {
 	@Test
 	public void testRotateLeft() {
 		this.movement.rotateLeft();
-		assertEquals(this.movement.getDirection(), Direction.UL);
+		assertEquals(Direction.UL, this.movement.getDirection());
 	}
 
 	@Test
 	public void testRotateRight() {
 		this.movement.rotateRight();
-		assertEquals(this.movement.getDirection(), Direction.UR);
+		assertEquals(Direction.UR, this.movement.getDirection());
 	}
 
 	@Test
 	public void testReverse() {
 		this.movement.reverse();
-		assertEquals(this.movement.getDirection(), Direction.D);
+		assertEquals(Direction.D, this.movement.getDirection());
 	}
 
 	@Test
 	public void testSetDirectionByPoint() {
-		this.movement.setDirection();
-		assertEquals(this.movement.getDirection(), Direction.DR);
+		this.movement.setDirection(new Point(1,1));
+		assertEquals(Direction.DR, this.movement.getDirection());
 	}
 
 }
