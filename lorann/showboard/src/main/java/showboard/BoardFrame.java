@@ -101,6 +101,19 @@ public class BoardFrame extends JFrame implements IBoard {
     public final void addPawn(final IPawn pawn) {
         this.getBoardPanel().addPawn(pawn);
     }
+    
+    /**
+     * Removes a pawn.
+     *
+     * @author Alexis SKRZYNSKI (alexis.skrzynski@viacesi.fr) aka NeoDarkFire
+     *
+     * @param pawn
+     *            the pawn
+     */
+    @Override
+    public final void removePawn(final IPawn pawn) {
+        this.getBoardPanel().removePawn(pawn);
+    }
 
     /*
      * (non-Javadoc)
