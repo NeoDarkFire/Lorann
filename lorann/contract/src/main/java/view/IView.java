@@ -17,8 +17,6 @@ public interface IView {
      * @param message
      *            the message
      */
-    void displayMessage(String message);
-    
     public void addSprite(Entity entity);
     public void removeSprite(Entity entity);
     public void displayLevel(ILevel level);

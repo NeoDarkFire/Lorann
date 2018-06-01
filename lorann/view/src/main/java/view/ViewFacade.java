@@ -4,6 +4,9 @@ import java.util.HashMap;
 
 import javax.swing.JOptionPane;
 
+import model.Direction;
+import model.ILevel;
+
 /**
  * <h1>The Class ViewFacade provides a facade of the View component.</h1>
  *
@@ -30,6 +33,7 @@ public class ViewFacade implements IView {
 	 * @param entity
 	 * 
 	 */
+    @Override
     public void addSprite(Entity entity) {
     	
     }
@@ -40,6 +44,7 @@ public class ViewFacade implements IView {
 	 * @param entity
 	 * 
 	 */
+    @Override
     public void removeSprite(Entity entity) {
     	
     }
@@ -51,6 +56,7 @@ public class ViewFacade implements IView {
 	 * @param level
 	 * 
 	 */
+    @Override
     public void displayLevel(ILevel level) {
     	
     }
@@ -64,6 +70,7 @@ public class ViewFacade implements IView {
 	 * @return Is the action pressed
 	 * 
 	 */
+    @Override
     public boolean isPressed(Action input) {
     	return false;
     }
@@ -77,6 +84,7 @@ public class ViewFacade implements IView {
 	 * @return Is the action released
 	 * 
 	 */
+    @Override
     public boolean isReleased(Action input) {
     	return false;
     }
@@ -86,21 +94,14 @@ public class ViewFacade implements IView {
 	 * Recover the direction if the key is pressed
 	 * 
 	 */
+    @Override
     public Direction getInputDirection() {
     	return null;
     }
     
+    @Override
     public void refresh() {
     	
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see view.IView#displayMessage(java.lang.String)
-     */
-    @Override
-    public final void displayMessage(final String message) {
-        JOptionPane.showMessageDialog(null, message);
     }
 
 }

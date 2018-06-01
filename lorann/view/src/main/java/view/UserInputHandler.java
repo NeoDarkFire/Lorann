@@ -2,6 +2,8 @@ package view;
 
 import java.util.HashMap;
 
+import model.Direction;
+
 /**
  * <h1>The Class UserInputHandler is used to associate the Action (key used) of the user and the direction of the player in the game.</h1>
  *

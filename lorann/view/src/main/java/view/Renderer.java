@@ -1,5 +1,6 @@
 package view;
 
+import model.ILevel;
 import showboard.BoardFrame;
 
 /**

@@ -2,6 +2,8 @@ package view;
 
 import static org.junit.Assert.*;
 
+import java.util.HashMap;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,14 +13,16 @@ import model.Direction;
 public class UserInputHandlerTest {
 
 	private UserInputHandler handler;
+	private HashMap<Action, Boolean> inputMap;
 	
 	@Before
-	public void setUp() throws Exception {
-		this.handler = new UserInputHandler();
+	public void setUp() {
+		this.inputMap = new HashMap<>();
+		this.handler = new UserInputHandler(this.inputMap);
 	}
 
 	@After
-	public void tearDown() throws Exception {
+	public void tearDown() {
 		this.handler = null;
 	}
 	
@@ -27,18 +31,18 @@ public class UserInputHandlerTest {
 		this.handler.press(Action.UP);
 		this.handler.press(Action.LEFT);
 		assertEquals(this.handler.getInputDirection(), Direction.UL);
-		sys.out.println("sucepute") ;
+	}
 	
 	@Test
 	public void testIsPressed() {
 		this.handler.press(Action.UP);
-		asserEquals(this.handler.isPressed().Action.UP, true);
+		assertEquals(this.handler.isPressed(Action.UP), true);
 	}
 	
 	@Test
 	public void testIsReleased() {
 		this.handler.press(Action.UP);
-		assertEquals(this.handler.isReleased().Action.UP, false);
+		assertEquals(this.handler.isReleased(Action.UP), false);
 	}
 	
 }
