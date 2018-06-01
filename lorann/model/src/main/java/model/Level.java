@@ -8,17 +8,18 @@ public class Level {
 	private int width;
 	private int height ;
 	private ArrayList<Entity> entities;
+	private LevelData levelData;
 	
 	public Level(LevelData levelData) {
-		
+		this.levelData = levelData;
 	}
 	
 	public int getWidth() {
-		return 0;
+		return width;
 	}
 	
 	public int getHeight() {
-		return 0;
+		return height;
 	}
 	
 	private void load() {

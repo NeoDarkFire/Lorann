@@ -15,12 +15,9 @@ public class LevelData {
 		return null;
 	}
 	
-	public CellData[][] getGrid(){
-		return null;
-	}
 	
-	public ITile getTiles() {
-		
+	public ITile[][] getTiles() {
+		return null;
 	}
 	
 	public ArrayList<Entity> getEntities(){

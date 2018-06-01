@@ -11,7 +11,7 @@ public abstract class TileFactory {
 		return null;
 	}
 	
-	public static ITile getEmptyFile() {
+	public static ITile getEmptyTile() {
 		return null;
 	}
 	
