@@ -3,6 +3,11 @@ package controller;
 import java.util.HashSet;
 import java.util.Set;
 
+import ecs.Component;
+import ecs.Engine;
+import model.components.InputComponent;
+import model.components.MoveComponent;
+
 public class UserInputSystem extends CustomSystem {
 
 	protected static Set<Class<? extends Component>> targets = new HashSet<>();
