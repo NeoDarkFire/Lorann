@@ -11,7 +11,7 @@ import java.util.Stack;
 
 /**
  * 
- * The Engine class stores ...
+ * The Engine class stores Systems and Entities so they can work together with components.
  * 
  * @author Alexis SKRZYNSKI (alexis.skrzynski@viacesi.fr) aka NeoDarkFire
  * 

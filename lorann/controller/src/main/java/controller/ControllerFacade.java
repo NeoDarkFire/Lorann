@@ -1,8 +1,10 @@
-package controller;
+ package controller;
 
 import java.sql.SQLException;
 import java.util.List;
 
+import ecs.Engine;
+import model.ILevel;
 import model.IModel;
 import view.IView;
 
@@ -19,6 +21,12 @@ public class ControllerFacade implements IController {
 
     /** The model. */
     private final IModel model;
+    
+    /** The engine. */
+    private final Engine engine;
+    
+    /** The level. */
+    private ILevel level;
 
     /**
      * Instantiates a new controller facade.
@@ -29,9 +37,9 @@ public class ControllerFacade implements IController {
      *            the model
      */
     public ControllerFacade(final IView view, final IModel model) {
-        super();
         this.view = view;
         this.model = model;
+        this.engine = new Engine();
     }
 
     /**
@@ -70,5 +78,13 @@ public class ControllerFacade implements IController {
      */
     public IModel getModel() {
         return this.model;
+    }
+    
+    public ILevel getCurrentLevel() {
+    	return this.level;
+    }
+    
+    public void nexLevel() {
+    	
     }
 }
