@@ -25,26 +25,16 @@ public final class ModelFacade implements IModel {
      * @see model.IModel#getExampleById(int)
      */
     @Override
-    public Example getExampleById(final int id) throws SQLException {
-        return ExampleDAO.getExampleById(id);
+    public Ilevel getLevelById(final int id) throws SQLException {
+        return null;
     }
 
     /*
      * (non-Javadoc)
-     * @see model.IModel#getExampleByName(java.lang.String)
+     * @see model.IModel#getExampleById(int)
      */
     @Override
-    public Example getExampleByName(final String name) throws SQLException {
-        return ExampleDAO.getExampleByName(name);
-    }
+    public void saveFromFile(File file) throws SQLException {
 
-    /*
-     * (non-Javadoc)
-     * @see model.IModel#getAllExamples()
-     */
-    @Override
-    public List<Example> getAllExamples() throws SQLException {
-        return ExampleDAO.getAllExamples();
     }
-
 }
