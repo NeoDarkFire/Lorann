@@ -95,7 +95,7 @@ public class Entity {
 	 */
 	public void destroy() {
 		if (this.engine != null) {
-			this.engine.notifySystems(this, EntityAction.DESTROY);
+			this.engine.getNotification(this, EntityAction.DESTROY);
 		}
 		for (final Class<? extends Component> compClass : this.components.keySet()) {
 			this.detach(compClass);
