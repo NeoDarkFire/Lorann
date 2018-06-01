@@ -1,6 +1,11 @@
 package model.dao;
 
+import java.io.File;
 import java.util.ArrayList;
+
+import ecs.Entity;
+import model.ITile;
+import model.MapData;
 
 public abstract class LevelDAO {
 
@@ -13,7 +18,7 @@ public abstract class LevelDAO {
 		return null;
 	}
 	
-	public ArrayList<Itile> getTilesByMapID(int id){
+	public ArrayList<ITile> getTilesByMapID(int id){
 		
 		return null;
 	}

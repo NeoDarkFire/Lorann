@@ -42,8 +42,7 @@ public interface IModel {
      *             the SQL exception
      */
 //    List<Example> getAllExamples() throws SQLException;
-    List<Example> getAllExamples() throws SQLException;
-    
+
     public ILevel getLevelByID(int id);
     public void saveFromFile(File file);
 

@@ -1,5 +1,7 @@
 package model;
 
+import java.awt.Image;
+
 public class Tile {
 
 	private TileSolidity solidity;
@@ -17,6 +19,7 @@ public class Tile {
 	 * @return
 	 */
 	public TileSolidity getSolidity() {
+		return null;
 		
 	}
 }

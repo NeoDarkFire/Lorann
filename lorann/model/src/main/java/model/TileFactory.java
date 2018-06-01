@@ -2,10 +2,10 @@ package model;
 
 public abstract class TileFactory {
 
-	private final static ITile EMPTY_TILE = new Tile("empty.png", TileSolidity.FREE);
-	private final static ITile BONE = new Tile("bone.png", TileSolidity.SOLID);
-	private final static ITile VBONE = new Tile("vertical_bone.png", TileSolidity.SOLID);
-	private final static ITile HBONE = new Tile("horizontal_bone.png", TileSolidity.SOLID);
+	private final static ITile EMPTY_TILE = (ITile) new Tile("empty.png", TileSolidity.FREE);
+	private final static ITile BONE = (ITile) new Tile("bone.png", TileSolidity.SOLID);
+	private final static ITile VBONE = (ITile) new Tile("vertical_bone.png", TileSolidity.SOLID);
+	private final static ITile HBONE = (ITile) new Tile("horizontal_bone.png", TileSolidity.SOLID);
 
 	public static ITile getFromSymbol(char symbol) {
 		return null;

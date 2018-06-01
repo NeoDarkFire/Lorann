@@ -1,5 +1,7 @@
 package model;
 
+import ecs.Entity;
+
 public abstract class EntityFactory {
 
 	public static Entity getFromSymbol(char symbol) {

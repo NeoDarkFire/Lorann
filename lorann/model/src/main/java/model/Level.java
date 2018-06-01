@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+import ecs.Entity;
+
 public class Level {
 
 	private ITile[][] grid;

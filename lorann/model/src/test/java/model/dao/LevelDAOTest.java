@@ -6,6 +6,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import model.MapData;
+
 public class LevelDAOTest {
 	
 	private MapData map;
@@ -21,8 +23,8 @@ public class LevelDAOTest {
 
 	@Test
 	public void testgetMapWithID() {
-        MapData expected = new MapData();
-        assertEquals(expected, this.map.getId());
+        MapData expected = new MapData(2, 20, 12);
+        assertEquals(expected, this.map.getID());
 	}
 
 }
