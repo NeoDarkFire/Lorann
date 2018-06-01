@@ -34,8 +34,12 @@ public class Movement {
 		LIST.add(Direction.UL);
 	}
 	
+	private Direction dir;
+	
 //----------------------METHODS---------------------	
-	public Movement(Direction dir) {}
+	public Movement(Direction dir) {
+		this.setDirection(dir);
+	}
 	public Movement(Point vec) {}
 	public int getX() {
 		return 0;
@@ -48,7 +52,11 @@ public class Movement {
 	public void rotateLeft() {}
 	public void rotateRight() {}
 	public void reverse() {}
-	public void setDirection(Direction dir) {}
+	public void setDirection(Direction dir) {
+		this.dir = dir;
+	}
+	public void setDirection(Point vec) {
+	}
 	public Direction getDirection() {
 		return null;
 	}
