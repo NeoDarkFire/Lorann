@@ -13,6 +13,7 @@ public class UserInputHandler implements InputHandler{
 	
 	private HashMap<Action, Boolean> inputMap;
 	
+	
 	public UserInputHandler(HashMap<Action, Boolean> inputMap) {
 		this.inputMap = inputMap;
 	}
