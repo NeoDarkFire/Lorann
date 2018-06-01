@@ -4,8 +4,6 @@ import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
 
-import model.dao.ExampleDAO;
-
 /**
  * <h1>The Class ModelFacade provides a facade of the Model component.</h1>
  *
@@ -21,14 +19,11 @@ public final class ModelFacade implements IModel {
         super();
     }
 
-<<<<<<< HEAD
-=======
 	@Override
 	public List<Example> getAllExamples() throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
->>>>>>> refs/heads/master
 
 	@Override
 	public ILevel getLevelByID(int id) {
@@ -41,9 +36,5 @@ public final class ModelFacade implements IModel {
 		// TODO Auto-generated method stub
 		
 	}
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> refs/heads/master
+	
 }
