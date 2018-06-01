@@ -1,6 +1,8 @@
 package model.components;
 
-public class CollectibleComponent extends Component {
+import ecs.Component;
+
+public class CollectibleComponent implements Component {
 	
 	public int score;
 

@@ -1,5 +1,7 @@
 package model.components;
 
-public class BishopAIComponent extends Component {
+import ecs.Component;
+
+public class BishopAIComponent implements Component {
 
 }

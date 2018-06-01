@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import javax.swing.JOptionPane;
 
+import ecs.Entity;
 import model.Direction;
 import model.ILevel;
 

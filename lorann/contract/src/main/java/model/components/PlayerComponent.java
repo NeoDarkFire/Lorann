@@ -1,5 +1,7 @@
 package model.components;
 
-public class PlayerComponent extends Component {
+import ecs.Component;
+
+public class PlayerComponent implements Component {
 
 }
