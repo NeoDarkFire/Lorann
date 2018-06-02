@@ -8,22 +8,28 @@ public abstract class TileFactory {
 	private final static ITile HBONE = (ITile) new Tile("horizontal_bone.png", TileSolidity.SOLID);
 
 	public static ITile getFromSymbol(char symbol) {
-		return null;
+		switch (symbol) {
+		case ' ': 	return getEmptyTile();
+		case 'O': 	return getBone();
+		case 'I': 	return getVerticalBone();
+		case '-':	return getHorizontalBone();
+		default:	return null;
+		}
 	}
 	
 	public static ITile getEmptyTile() {
-		return null;
+		return EMPTY_TILE;
 	}
 	
 	public static ITile getBone() {
-		return null;
+		return BONE;
 	}
 	
 	public static ITile getVerticalBone() {
-		return null;
+		return VBONE;
 	}
 	
 	public static ITile getHorizontalBone() {
-		return null;
+		return HBONE;
 	}
 }

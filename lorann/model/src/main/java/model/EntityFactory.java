@@ -5,8 +5,18 @@ import ecs.Entity;
 public abstract class EntityFactory {
 
 	public static Entity getFromSymbol(char symbol) {
-		
-		return null;
+		switch (symbol) {
+		case 'X':	return createEnergyBall();
+		case 'U':	return createDoor();
+		case 'M':	return createMask();
+		case '@':	return createLorann();
+		case 'A':	return createDemon(1);
+		case 'B':	return createDemon(2);
+		case 'C':	return createDemon(3);
+		case 'D':	return createDemon(4);
+		case '1':	return createPurse();
+		default:	return null;
+		}
 	}
 	
 	public static Entity createLorann() {
