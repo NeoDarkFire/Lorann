@@ -46,8 +46,9 @@ public class Level {
 				this.grid[y][x] = tile;
 			}
 			else if (entity != null) {
-				pos = ((PositionComponent) entity.get(PositionComponent.class)).pos;
-				pos.move(x, y);
+				pos = entity.get(PositionComponent.class).pos;
+				pos.x = x;
+				pos.y = y;
 				this.addEntity(entity);
 			}
 		}
@@ -76,7 +77,7 @@ public class Level {
 	public Entity getEntityAt(int x , int y) {
 		Point pos;
 		for (final Entity e : this.entities) {
-			pos = ((PositionComponent) e.get(PositionComponent.class)).pos;
+			pos = e.get(PositionComponent.class).pos;
 			if (pos.getX() == x && pos.getY() == y) {
 				return e;
 			}

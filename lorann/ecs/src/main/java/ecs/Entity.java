@@ -155,8 +155,9 @@ public class Entity {
 	 * @param compClass The class of the Component.
 	 * @return The Component.
 	 */
-	public Component get(final Class<? extends Component> compClass) {
-		return this.components.get(compClass);
+	@SuppressWarnings("unchecked")
+	public <C extends Component> C get(final Class<C> compClass) {
+		return (C) this.components.get(compClass);
 	}
 	
 	/**
