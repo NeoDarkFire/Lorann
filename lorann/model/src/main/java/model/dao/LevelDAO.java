@@ -6,6 +6,8 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import model.CellData;
@@ -50,9 +52,10 @@ public abstract class LevelDAO extends AbstractDAO {
         return cells;
 	}
 	
-	public static void saveFromFile (File file) throws FileNotFoundException {
+	static Map<Class<?>, Object> getDataFromFile(File file) throws FileNotFoundException {
+		// Method stub
+		Map<Class<?>, Object> data = new HashMap<>();
 		final Scanner sc = new Scanner(file);
-		
 		int level_width = 0;
 		int level_height = 0;
 		int x = 0;
@@ -60,12 +63,23 @@ public abstract class LevelDAO extends AbstractDAO {
 		
 		for (String line = sc.nextLine(); sc.hasNextLine() ; line = sc.nextLine(), y++) {
 			for (x = 0; x < line.length(); x++) {
+				final char symbol = line.charAt(x);
 				
+				
+				
+				level_width = Math.max(level_width, x);
 			}
 		}
-		level_width = x;
 		level_height = y+1;
 		
 		sc.close();
+		
+		data.put(MapData.class, new MapData(0, level_width, level_height));
+		
+		return data;
+	}
+	
+	public static void saveFromFile (File file) throws FileNotFoundException {
+		// Method stub
 	}
 }

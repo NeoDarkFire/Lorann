@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Map;
 
 import org.junit.After;
 import org.junit.Before;
@@ -25,11 +26,17 @@ public class LevelDAOTest {
 	}
 
 	@Test
-	public void testSaveFromFile() throws FileNotFoundException {
+	public void testGetDataFromFile() throws FileNotFoundException {
 		ClassLoader classLoader = getClass().getClassLoader();
 		String fileName = "level_tst.txt";
 		File file = new File(classLoader.getResource(fileName).getFile());
-        LevelDAO.saveFromFile(file);
+        
+		Map<Class<?>, Object> data = LevelDAO.getDataFromFile(file);
+        
+		MapData map = (MapData) data.get(MapData.class);
+		assertEquals(0, map.getID());
+		assertEquals(20, map.getWidth());
+		assertEquals(12, map.getHeight());
 	}
 
 }
