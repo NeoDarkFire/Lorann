@@ -1,27 +1,22 @@
 package model.dao;
 
 import java.io.File;
-import java.sql.CallableStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-
-import ecs.Entity;
-import model.CellData;
-import model.Example;
-import model.ITile;
-import model.MapData;
-
+import java.io.FileNotFoundException;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import model.CellData;
+import model.MapData;
 
 public abstract class LevelDAO extends AbstractDAO {
 
 	final static private String sqlMapWithID = "{call findMapWithID(?)}";
-	final static private String sqlTilesByMapID = "{call findTilesByMapID}";
-	final static private String sqlEntitiesByMapID = "{call findEntitiesByMapID}";
+	final static private String sqlCellsByMapID = "{call findCellsByMapID}";
 
-	public MapData getMapWithID(int id) throws SQLException {
+	public static MapData getMapWithID(int id) throws SQLException {
 		final CallableStatement callStatement = prepareCall(sqlMapWithID);
         MapData mapData = null;
         callStatement.setInt(1, id);
@@ -37,9 +32,9 @@ public abstract class LevelDAO extends AbstractDAO {
         return mapData;
 	}
 	
-	private ArrayList<CellData> getCellsByMapID(int id, String sql) throws SQLException {
+	public static ArrayList<CellData> getCellsByMapID(int id) throws SQLException {
 		final ArrayList<CellData> cells = new ArrayList<>();
-        final CallableStatement callStatement = prepareCall(sql);
+        final CallableStatement callStatement = prepareCall(sqlCellsByMapID);
         if (callStatement.execute()) {
             final ResultSet result = callStatement.getResultSet();
 
@@ -55,15 +50,22 @@ public abstract class LevelDAO extends AbstractDAO {
         return cells;
 	}
 	
-	public ArrayList<CellData> getTilesByMapID(int id) throws SQLException {
-		return this.getCellsByMapID(id, sqlTilesByMapID);
-	}
-	
-	public ArrayList<CellData> getEntitiesByMapID(int id) throws SQLException{
-		return this.getCellsByMapID(id, sqlEntitiesByMapID);
-	}
-	
-	public void saveFromFile (File file) {
+	public static void saveFromFile (File file) throws FileNotFoundException {
+		final Scanner sc = new Scanner(file);
 		
+		int level_width = 0;
+		int level_height = 0;
+		int x = 0;
+		int y = 0;
+		
+		for (String line = sc.nextLine(); sc.hasNextLine() ; line = sc.nextLine(), y++) {
+			for (x = 0; x < line.length(); x++) {
+				
+			}
+		}
+		level_width = x;
+		level_height = y+1;
+		
+		sc.close();
 	}
 }

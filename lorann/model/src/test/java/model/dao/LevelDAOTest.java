@@ -2,6 +2,9 @@ package model.dao;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +17,7 @@ public class LevelDAOTest {
 
 	@Before
 	public void setUp() throws Exception {
-		this.map = new MapData(1 , 20 , 12);
+		
 	}
 
 	@After
@@ -22,9 +25,11 @@ public class LevelDAOTest {
 	}
 
 	@Test
-	public void testgetMapWithID() {
-        MapData expected = new MapData(2, 20, 12);
-        assertEquals(expected, this.map.getID());
+	public void testSaveFromFile() throws FileNotFoundException {
+		ClassLoader classLoader = getClass().getClassLoader();
+		String fileName = "level_tst.txt";
+		File file = new File(classLoader.getResource(fileName).getFile());
+        LevelDAO.saveFromFile(file);
 	}
 
 }
