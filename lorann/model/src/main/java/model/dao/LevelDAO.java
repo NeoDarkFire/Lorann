@@ -6,9 +6,7 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 import model.CellData;
@@ -40,7 +38,7 @@ public abstract class LevelDAO extends AbstractDAO {
         return mapData;
 	}
 	
-	public static ArrayList<CellData> getCellsByMapID(final int id) throws SQLException {
+	public static List<CellData> getCellsByMapID(final int id) throws SQLException {
 		final ArrayList<CellData> cells = new ArrayList<>();
         final CallableStatement callStatement = prepareCall(sqlCellsByMapID);
         callStatement.setInt(1, id);
