@@ -161,17 +161,6 @@ public class Entity {
 	}
 	
 	/**
-	 * Updates the Component associated without notifying the Engine.
-	 * A Component must already be registered with the Entity.
-	 * @param compClass The class of the Component.
-	 * @param comp The Component.
-	 * @return The old Component.
-	 */
-	public Component set(final Class<? extends Component> compClass, final Component comp) {
-		return this.components.replace(compClass, comp);
-	}
-	
-	/**
 	 * Get all the Components of the Entity.
 	 * @return A Collection of Component.
 	 */
