@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import model.CellData;
 import model.LevelData;
@@ -73,28 +72,6 @@ public abstract class LevelDAO extends AbstractDAO {
         return maps;
 	}
 	
-	static LevelData getDataFromFile(final File file) throws FileNotFoundException, SQLException {
-		List<CellData> cells = new ArrayList<>();
-		final Scanner sc = new Scanner(file);
-		int map_width = 0;
-		int map_height = 0;
-		int x = 0;
-		int y = 0;
-		String line;
-		while (sc.hasNextLine()) {
-			line = sc.nextLine();
-			for (x = 0; x < line.length(); x++) {
-				final char symbol = line.charAt(x);
-				cells.add(new CellData(0, x, y, symbol, 0));
-			}
-			map_width = Math.max(map_width, x);
-			y++;
-		}
-		map_height = y;
-		sc.close();
-		return new LevelData(cells, new MapData(0, map_width, map_height));
-	}
-	
 	private static void updateMap(final MapData map) throws SQLException {
 		final CallableStatement callStatement = prepareCall(sqlUpdateMap);
         callStatement.setInt(1, map.getID());
@@ -119,7 +96,7 @@ public abstract class LevelDAO extends AbstractDAO {
 	}
 
 	public static void saveFromFile(final File file, final int mapID) throws FileNotFoundException, SQLException {
-		LevelData levelData = getDataFromFile(file);
+		LevelData levelData = new LevelData(file);
 		MapData mapData = (MapData) levelData.getMap();
 		List<CellData> cells = levelData.getGrid();
 		
