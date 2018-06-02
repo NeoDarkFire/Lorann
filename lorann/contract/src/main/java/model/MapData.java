@@ -6,12 +6,16 @@ public class MapData {
 	private int id;
 	private int width;
 	private int height;
-	private final static int IDCOL = 1 ;
-	private final static int WIDTHCOL= 2 ;
-	private final static int HEIGHTCOL= 3 ;
+	public final static int IDCOL = 1 ;
+	public final static int WIDTHCOL= 2 ;
+	public final static int HEIGHTCOL= 3 ;
 	
 //----------------------METHODS---------------------	
-	public MapData(int id, int width, int height) {}
+	public MapData(int id, int width, int height) {
+		this.setID(id);
+		this.setWidth(width);
+		this.setHeight(height);
+	}
 
 	public int getID() {
 		return id;

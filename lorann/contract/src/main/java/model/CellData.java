@@ -8,14 +8,20 @@ public class CellData {
 	private int y;
 	private char symbol;
 	private int idMap;
-	private final static int IDCOL = 1;
-	private final static int XCOL = 2;
-	private final static int YCOL = 3;
-	private final static int SYMBOLCOL = 4;
-	private final static int IDMAPCOL = 5;
+	public final static int IDCOL = 1;
+	public final static int XCOL = 2;
+	public final static int YCOL = 3;
+	public final static int SYMBOLCOL = 4;
+	public final static int IDMAPCOL = 5;
 
 //----------------------METHODS---------------------	
-	public CellData(int id, int x, int y, int idMap, int idGameObject) {}
+	public CellData(int id, int x, int y, char symbol, int idMap) {
+		this.setID(id);
+		this.setX(x);
+		this.setY(y);
+		this.setSymbol(symbol);
+		this.setIDMap(idMap);
+	}
 
 	public int getID() {
 		return id;
