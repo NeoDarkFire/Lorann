@@ -16,16 +16,16 @@ import java.util.TreeSet;
  * @see ecs.Entity
  *
  */
-public class System implements Iterable<Entity> {
+public abstract class System implements Iterable<Entity> {
 
 	/**
 	 * Which components the System targets.
 	 */
-	static protected Set<Class<? extends Component>> targets = new HashSet<>();
+	protected Set<Class<? extends Component>> targets;
 	/**
 	 * Which components are excluded by the System.
 	 */
-	static protected Set<Class<? extends Component>> excluded = new HashSet<>();
+	protected Set<Class<? extends Component>> excluded;
 	
 	/**
 	 * The entities that conform to the System's criteria.
@@ -60,6 +60,8 @@ public class System implements Iterable<Entity> {
 
 	public System() {
 		this.entities = new TreeSet<>(new EntityComparator(this));
+		this.targets = new HashSet<>();
+		this.excluded = new HashSet<>();
 	}
 	
 	/**
@@ -76,11 +78,11 @@ public class System implements Iterable<Entity> {
 	 * Adds an entity to the System.
 	 * An Entity cannot be added twice.
 	 * <p>
-	 * Note: This does not check if the Entity is conform.
+	 * Note: This does check if the Entity is conform.
 	 * @param e An Entity.
 	 */
 	void addEntity(final Entity e) {
-		if (!this.hasEntity(e)) {
+		if (!this.hasEntity(e) && e.hasAll(this.getTargets()) && !e.hasOne(this.getExcluded())) {
 			this.getEntities().add(e);
 			this.onEntityAdded(e);
 		}
@@ -161,7 +163,7 @@ public class System implements Iterable<Entity> {
 	 * @return A Set of Component Class.
 	 */
 	public Set<Class<? extends Component>> getTargets() {
-		return targets;
+		return this.targets;
 	}
 	
 	/**
@@ -169,7 +171,7 @@ public class System implements Iterable<Entity> {
 	 * @return A Set of Component Class.
 	 */
 	public Set<Class<? extends Component>> getExcluded() {
-		return excluded;
+		return this.excluded;
 	}
 	
 }

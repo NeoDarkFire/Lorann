@@ -59,7 +59,7 @@ public class Engine {
 	public Collection<Entity> getEntitiesWithComponents(final Collection<Class<? extends Component>> compClasses) {
 		Set<Entity> entities = new HashSet<>();
 		for (final Entity e : this.entities.values()) {
-			if (e.has(compClasses)) {
+			if (e.hasAll(compClasses)) {
 				entities.add(e);
 			}
 		}
@@ -91,9 +91,7 @@ public class Engine {
 		this.entities.put(id, e);
 		e.register(this);
 		for (final System sys : this.orderedSystems) {
-			if (e.has(sys.getTargets()) && !e.has(sys.getExcluded())) {
-				sys.addEntity(e);
-			}
+			sys.addEntity(e);
 		}
 	}
 	
@@ -142,9 +140,7 @@ public class Engine {
 		this.systems.put(sys.getClass(), sys);
 		this.orderedSystems.add(sys);
 		for (final Entity e : this.getEntitiesWithComponents(sys.getTargets())) {
-			if (!e.has(sys.getExcluded())) {
-				sys.addEntity(e);
-			}
+			sys.addEntity(e);
 		}
 	}
 	

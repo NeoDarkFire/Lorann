@@ -182,13 +182,27 @@ public class Entity {
 	 * @param compClasses A Collection of Component classes.
 	 * @return True if the Entity has all the Components.
 	 */
-	public boolean has(final Collection<Class<? extends Component>> compClasses) {
+	public boolean hasAll(final Collection<Class<? extends Component>> compClasses) {
 		for (Class<? extends Component> compClass : compClasses) {
 			if (!this.has(compClass)) {
 				return false;
 			}
 		}
 		return true;
+	}
+	
+	/**
+	 * Get whether if the Entity has one out of many specified Components.
+	 * @param compClasses A Collection of Component classes.
+	 * @return True if the Entity has one of the Components.
+	 */
+	public boolean hasOne(final Collection<Class<? extends Component>> compClasses) {
+		for (Class<? extends Component> compClass : compClasses) {
+			if (this.has(compClass)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
