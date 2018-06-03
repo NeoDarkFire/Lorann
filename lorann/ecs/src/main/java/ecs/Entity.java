@@ -271,5 +271,20 @@ public class Entity {
 		}
 		return false;
 	}
+	
+	/**
+	 * Get whether if the Entity has one out of many specified Components.
+	 * @param compClasses Component classes.
+	 * @return True if the Entity has one of the Components.
+	 */
+	@SafeVarargs
+	final public boolean hasOne(final Class<? extends Component>... compClasses) {
+		for (Class<? extends Component> compClass : compClasses) {
+			if (this.has(compClass)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 }
