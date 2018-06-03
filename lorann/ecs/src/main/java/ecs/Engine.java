@@ -20,7 +20,7 @@ import java.util.Stack;
  * @see ecs.System
  *
  */
-public class Engine {
+public final class Engine {
 
 	private Map<Integer, Entity> entities;
 	private Map<Class<? extends System>, System> systems;
@@ -41,7 +41,7 @@ public class Engine {
 	 * @param compClass The Component class.
 	 * @return A Collection of Entity.
 	 */
-	public Collection<Entity> getEntitiesWithComponent(final Class<? extends Component> compClass) {
+	final public Collection<Entity> getEntitiesWithComponent(final Class<? extends Component> compClass) {
 		Set<Entity> entities = new HashSet<>();
 		for (final Entity e : this.entities.values()) {
 			if (e.has(compClass)) {
@@ -56,7 +56,23 @@ public class Engine {
 	 * @param compClasses A Collection of Component class.
 	 * @return A Collection of Entity.
 	 */
-	public Collection<Entity> getEntitiesWithComponents(final Collection<Class<? extends Component>> compClasses) {
+	final public Collection<Entity> getEntitiesWithComponents(final Collection<Class<? extends Component>> compClasses) {
+		Set<Entity> entities = new HashSet<>();
+		for (final Entity e : this.entities.values()) {
+			if (e.hasAll(compClasses)) {
+				entities.add(e);
+			}
+		}
+		return entities;
+	}
+	
+	/**
+	 * Gets all the entities having all the given Component.
+	 * @param compClasses One to many Component class.
+	 * @return A Collection of Entity.
+	 */
+	@SafeVarargs
+	final public Collection<Entity> getEntitiesWithComponents(final Class<? extends Component>... compClasses) {
 		Set<Entity> entities = new HashSet<>();
 		for (final Entity e : this.entities.values()) {
 			if (e.hasAll(compClasses)) {
@@ -70,7 +86,7 @@ public class Engine {
 	 * Get a valid ID for a new Entity.
 	 * @return A unique ID.
 	 */
-	private int getID() {
+	final private int getID() {
 		if (this.unusedIDs.empty()) {
 			this.maxID++;
 			return this.maxID;
@@ -85,7 +101,7 @@ public class Engine {
 	 * <p>The Entity is automatically added to the relevant systems.
 	 * @param e An Entity.
 	 */
-	public void addEntity(final Entity e) {
+	final public void addEntity(final Entity e) {
 		final int id = this.getID();
 		e.setID(id);
 		this.entities.put(id, e);
@@ -100,7 +116,7 @@ public class Engine {
 	 * <p>The Entity is automatically removed from the relevant systems.
 	 * @param id The ID of an Entity in the Engine.
 	 */
-	public Entity removeEntity(final int id) {
+	final public Entity removeEntity(final int id) {
 		final Entity e = this.getEntity(id);
 		for (final System sys : this.orderedSystems) {
 			if (sys.hasEntity(e)) {
@@ -118,8 +134,17 @@ public class Engine {
 	 * @param id The unique ID of the Entity.
 	 * @return An Entity.
 	 */
-	public Entity getEntity(final int id) {
+	final public Entity getEntity(final int id) {
 		return this.entities.get(id);
+	}
+	
+	/**
+	 * Checks if an Entity is in the Engine. 
+	 * @param id The unique ID of the Entity.
+	 * @return An Entity.
+	 */
+	final public boolean hasEntity(final Entity entity) {
+		return this.entities.containsValue(entity);
 	}
 	
 	/**
@@ -127,8 +152,17 @@ public class Engine {
 	 * @param sysClass A System class.
 	 * @return True if the System is in the Engine.
 	 */
-	public boolean hasSystem(final Class<? extends System> sysClass) {
+	final public boolean hasSystem(final Class<? extends System> sysClass) {
 		return this.systems.containsKey(sysClass);
+	}
+	
+	/**
+	 * Gets a System in the Engine.
+	 * @param sysClass A System class.
+	 * @return The System.
+	 */
+	final public System getSystem(final Class<? extends System> sysClass) {
+		return this.systems.get(sysClass);
 	}
 	
 	/**
@@ -136,7 +170,7 @@ public class Engine {
 	 * <p>Relevant entities are automatically added to the System.
 	 * @param sys A System.
 	 */
-	public void addSystem(final System sys) {
+	final public void addSystem(final System sys) {
 		this.systems.put(sys.getClass(), sys);
 		this.orderedSystems.add(sys);
 		for (final Entity e : this.getEntitiesWithComponents(sys.getTargets())) {
@@ -149,7 +183,7 @@ public class Engine {
 	 * <p>Relevant entities are automatically removed from the System.
 	 * @param sysClass The System Class.
 	 */
-	public void removeSystem(final Class<? extends System> sysClass) {
+	final public void removeSystem(final Class<? extends System> sysClass) {
 		final System sys = this.systems.get(sysClass);
 		this.orderedSystems.remove(sys);
 		this.systems.remove(sysClass);
@@ -163,7 +197,7 @@ public class Engine {
 	 * @param e An Entity.
 	 * @param action An Action.
 	 */
-	void getNotification(final Entity e, final EntityAction action) {
+	final void getNotification(final Entity e, final EntityAction action) {
 		if (action == EntityAction.DESTROY) {
 			this.removeEntity(e.getID());
 		}
@@ -175,7 +209,7 @@ public class Engine {
 	 * @param action An Action.
 	 * @param compClass A Component Class.
 	 */
-	void notifySystems(final Entity e, EntityAction action, Class<? extends Component> compClass) {
+	final void notifySystems(final Entity e, EntityAction action, Class<? extends Component> compClass) {
 		for (final System sys : this.orderedSystems) {
 			if (sys.requires(compClass)) {
 				if (sys.hasEntity(e) && action == EntityAction.DETACH) {
@@ -192,7 +226,7 @@ public class Engine {
 	 * Processes all Systems
 	 * @param dt Delta-time, the amount of time elapsed since last update.
 	 */
-	public void update(int dt) {
+	final public void update(int dt) {
 		for (final System sys : this.orderedSystems) {
 			sys.update(this, dt);
 		}

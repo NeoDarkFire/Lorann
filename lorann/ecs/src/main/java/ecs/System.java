@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.TreeSet;
+import java.util.concurrent.ConcurrentSkipListSet;
 
 /**
  * 
@@ -59,7 +59,7 @@ public abstract class System implements Iterable<Entity> {
 	}
 
 	public System() {
-		this.entities = new TreeSet<>(new EntityComparator(this));
+		this.entities = new ConcurrentSkipListSet<>(new EntityComparator(this));
 		this.targets = new HashSet<>();
 		this.excluded = new HashSet<>();
 	}

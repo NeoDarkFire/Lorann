@@ -2,6 +2,9 @@ package ecs;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,6 +38,35 @@ public class EntityTest {
 			fail("Failed to attach a component.");
 		}
 	}
+	
+	@Test
+	public void testAttachCollection() {
+		Collection<Component> c = new ArrayList<>();
+		c.add(new C1());
+		c.add(new C2());
+		this.entity.attach(c);
+		if (!this.entity.has(C1.class) && !this.entity.has(C2.class)) {
+			fail("Failed to attach a collection of component.");
+		}
+	}
+	
+	@Test
+	public void testAttachArray() {
+		Component[] c = {new C1(), new C2()};
+		this.entity.attach(c);
+		if (!this.entity.has(C1.class) && !this.entity.has(C2.class)) {
+			fail("Failed to attach an array of component.");
+		}
+	}
+	
+	@Test
+	public void testAttachMultiple() {
+		this.entity.attach(new C1(), new C2());
+		if (!this.entity.has(C1.class) && !this.entity.has(C2.class)) {
+			fail("Failed to attach an array of component.");
+		}
+	}
+	
 
 	@Test
 	public void testDetach() {

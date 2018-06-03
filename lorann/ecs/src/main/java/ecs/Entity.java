@@ -43,23 +43,23 @@ public class Entity {
 	}
 	
 	/**
-	 * Creates an Entity with one specified Component.
+	 * Creates an Entity with one to many Components.
+	 * @param comps Components.
 	 */
 	
-	public Entity(final Component comp) {
+	public Entity(final Component... comps) {
 		this();
-		this.attach(comp);
+		this.attach(comps);
 	}
 	
 	/**
-	 * Creates an Entity with a Collection of Component.
+	 * Creates an Entity with a Collection of Components.
+	 * @param comps A Collection of Component.
 	 */
 	
 	public Entity(final Collection<Component> comps) {
 		this();
-		for (final Component comp : comps) {
-			this.attach(comp);
-		}
+		this.attach(comps);
 	}
 	
 	/**
@@ -138,6 +138,30 @@ public class Entity {
 	}
 	
 	/**
+	 * Attach one to many Component to the Entity.
+	 * If there is already a Component for a Component class, detach it.
+	 * @param comps Components.
+	 * @see detach
+	 */
+	public void attach(final Component... comps) {
+		for (final Component comp : comps) {
+			this.attach(comp);
+		}
+	}
+	
+	/**
+	 * Attach a Collection of Component to the Entity.
+	 * If there is already a Component for a Component class, detach it.
+	 * @param comps A Collection of Component.
+	 * @see detach
+	 */
+	public void attach(final Collection<Component> comps) {
+		for (final Component comp : comps) {
+			this.attach(comp);
+		}
+	}
+	
+	/**
 	 * Detaches a Component from the Entity.
 	 * @param compClass The class of the Component to detach.
 	 * @return the old Component.
@@ -148,6 +172,27 @@ public class Entity {
 			this.engine.notifySystems(this, EntityAction.DETACH, compClass);
 		}
 		return oldComp;
+	}
+	
+	/**
+	 * Detaches one to many Component from the Entity.
+	 * @param compClasses The classes of the Components to detach.
+	 */
+	@SafeVarargs
+	final public <C extends Component> void detach(final Class<C>... compClasses) {
+		for (final Class<C> compClass : compClasses) {
+			this.detach(compClass);
+		}
+	}
+	
+	/**
+	 * Detaches a Collection of Component from the Entity.
+	 * @param compClasses A Collection of the class of the Components to detach.
+	 */
+	public <C extends Component> void detach(final Collection<Class<C>> compClasses) {
+		for (final Class<C> compClass : compClasses) {
+			this.detach(compClass);
+		}
 	}
 	
 	/**
@@ -185,6 +230,21 @@ public class Entity {
 	 */
 	public boolean hasAll(final Collection<Class<? extends Component>> compClasses) {
 		for (Class<? extends Component> compClass : compClasses) {
+			if (!this.has(compClass)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	/**
+	 * Get whether if the Entity has multiple specified Components.
+	 * @param compClasses Component classes.
+	 * @return True if the Entity has all the Components.
+	 */
+	@SafeVarargs
+	final public <C extends Component> boolean hasAll(final Class<C>... compClasses) {
+		for (Class<C> compClass : compClasses) {
 			if (!this.has(compClass)) {
 				return false;
 			}
