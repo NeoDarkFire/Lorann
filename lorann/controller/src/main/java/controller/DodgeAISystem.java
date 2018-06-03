@@ -9,15 +9,7 @@ import model.ILevel;
 import model.ITile;
 import model.Movement;
 import model.TileSolidity;
-import model.components.CollectibleComponent;
-import model.components.DemonComponent;
-import model.components.DodgeAIComponent;
-import model.components.KillableComponent;
-import model.components.MoveComponent;
-import model.components.PlayerComponent;
-import model.components.PositionComponent;
-import model.components.SolidComponent;
-import model.components.SpellComponent;
+import model.components.*;
 
 public class DodgeAISystem extends CustomSystem{
 
