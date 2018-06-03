@@ -18,7 +18,9 @@ public class Tile implements ITile {
 	 */
 	public Tile(String filename , TileSolidity solidity) {
 		try {
-			this.image = ImageIO.read(new File(filename));
+			ClassLoader classLoader = getClass().getClassLoader();
+			File file = new File(classLoader.getResource(filename).getFile());
+			this.image = ImageIO.read(file);
 		}
 		catch (IOException ex) {
 			ex.printStackTrace();

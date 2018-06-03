@@ -13,6 +13,8 @@ import ecs.Entity;
 import model.components.*;
 
 public abstract class EntityFactory {
+	
+	static ClassLoader classLoader = EntityFactory.class.getClassLoader();
 
 	public static Entity getFromSymbol(final char symbol) {
 		switch (symbol) {
@@ -50,14 +52,10 @@ public abstract class EntityFactory {
 		AnimationComponent animation = new AnimationComponent();
 		animation.images = new ArrayList<>();
 		try {
-			animation.images.add(ImageIO.read(new File("lorann_u.png")));
-			animation.images.add(ImageIO.read(new File("lorann_ur.png")));
-			animation.images.add(ImageIO.read(new File("lorann_r.png")));
-			animation.images.add(ImageIO.read(new File("lorann_dr.png")));
-			animation.images.add(ImageIO.read(new File("lorann_d.png")));
-			animation.images.add(ImageIO.read(new File("lorann_dl.png")));
-			animation.images.add(ImageIO.read(new File("lorann_l.png")));
-			animation.images.add(ImageIO.read(new File("lorann_ul.png")));
+			String[] dirs = {"u", "ur", "r", "dr", "d", "dl", "l", "ul"};
+			for (final String dir : dirs) {
+				animation.images.add(ImageIO.read(new File(classLoader.getResource("lorann_" + dir + ".png").getFile())));
+			}
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
@@ -95,7 +93,7 @@ public abstract class EntityFactory {
 		
 		DrawableComponent drawable = new DrawableComponent();
 		try {
-			drawable.image = ImageIO.read(new File("demon_" + type + ".png"));
+			drawable.image = ImageIO.read(new File(classLoader.getResource("demon_" + type + ".png").getFile()));
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
@@ -142,7 +140,7 @@ public abstract class EntityFactory {
 		animation.images = new ArrayList<>();
 		try {
 			for (int i = 1; i <= 5; i++) {
-				animation.images.add(ImageIO.read(new File("spell" + i + ".png")));
+				animation.images.add(ImageIO.read(new File(classLoader.getResource("spell" + i + ".png").getFile())));
 			}
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -177,7 +175,7 @@ public abstract class EntityFactory {
 		
 		DrawableComponent drawable = new DrawableComponent();
 		try {
-			drawable.image = ImageIO.read(new File("gate_closed.png"));
+			drawable.image = ImageIO.read(new File(classLoader.getResource("gate_closed.png").getFile()));
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
@@ -201,7 +199,7 @@ public abstract class EntityFactory {
 		
 		DrawableComponent drawable = new DrawableComponent();
 		try {
-			drawable.image = ImageIO.read(new File("gate_open.png"));
+			drawable.image = ImageIO.read(new File(classLoader.getResource("gate_open.png").getFile()));
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
@@ -226,7 +224,7 @@ public abstract class EntityFactory {
 		
 		DrawableComponent drawable = new DrawableComponent();
 		try {
-			drawable.image = ImageIO.read(new File("energy_ball.png"));
+			drawable.image = ImageIO.read(new File(classLoader.getResource("energy_ball.png").getFile()));
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
@@ -251,7 +249,7 @@ public abstract class EntityFactory {
 		
 		DrawableComponent drawable = new DrawableComponent();
 		try {
-			drawable.image = ImageIO.read(new File("purse.png"));
+			drawable.image = ImageIO.read(new File(classLoader.getResource("purse.png").getFile()));
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
