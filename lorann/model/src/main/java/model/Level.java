@@ -11,8 +11,6 @@ import model.components.PositionComponent;
 public class Level {
 
 	private ITile[][] grid;
-	private int width;
-	private int height ;
 	private ArrayList<Entity> entities;
 	private LevelData levelData;
 	
@@ -22,19 +20,28 @@ public class Level {
 	}
 	
 	public int getWidth() {
-		return width;
+		return this.levelData.getMap().getWidth();
 	}
 	
 	public int getHeight() {
-		return height;
+		return this.levelData.getMap().getHeight();
 	}
 	
 	private void load() {
 		List<CellData> cells = this.levelData.getGrid();
-		ITile tile;
+		ITile tile = TileFactory.getEmptyTile();
 		Entity entity;
 		int x, y;
 		Point pos;
+		
+		this.grid = new ITile[this.getHeight()][this.getWidth()];
+		for (y = 0; y < this.getHeight(); y++) {
+			for (x = 0; x < this.getWidth(); x++) {
+				this.grid[y][x] = tile;
+			}
+		}
+		this.entities = null;
+		this.entities = new ArrayList<>();
 		
 		for (final CellData cell : cells) {
 			x = cell.getX();
@@ -75,10 +82,10 @@ public class Level {
 	}
 	
 	public Entity getEntityAt(int x , int y) {
-		Point pos;
+		PositionComponent pos;
 		for (final Entity e : this.entities) {
-			pos = e.get(PositionComponent.class).pos;
-			if (pos.getX() == x && pos.getY() == y) {
+			pos = e.get(PositionComponent.class);
+			if (pos != null && pos.pos.getX() == x && pos.pos.getY() == y) {
 				return e;
 			}
 		}
