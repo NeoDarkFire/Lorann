@@ -174,7 +174,8 @@ public class Entity {
 	 * @return True if the Entity has the Component.
 	 */
 	public boolean has(final Class<? extends Component> compClass) {
-		return this.components.containsKey(compClass);
+		return this.components.containsKey(compClass)
+			|| (compClass == Component.class && this.components.size() > 0);
 	}
 	
 	/**

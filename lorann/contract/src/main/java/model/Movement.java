@@ -15,7 +15,7 @@ public class Movement {
 	private final static ArrayList<Direction> LIST = new ArrayList<>();
 	private final static HashMap<Double, Direction> ANGLE = new HashMap<>();
 	
-	{
+	static {
 		MAP.put(Direction.U, new Point(0, -1));
 		MAP.put(Direction.D, new Point(0, 1));
 		MAP.put(Direction.L, new Point(-1, 0));

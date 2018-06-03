@@ -19,6 +19,14 @@ public class EntityTest {
 	public void tearDown() throws Exception {
 		this.entity = null;
 	}
+	
+	@Test
+	public void hasComponent() {
+		final Entity e = new Entity();
+		assertEquals(false, e.has(Component.class));
+		e.attach(new C1());
+		assertEquals(true, e.has(Component.class));
+	}
 
 	@Test
 	public void testAttach() {
