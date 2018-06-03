@@ -43,23 +43,21 @@ public class Entity {
 	}
 	
 	/**
-	 * Creates an Entity with one specified Component.
+	 * Creates an Entity with one to many Components.
 	 */
 	
-	public Entity(final Component comp) {
+	public Entity(final Component... comps) {
 		this();
-		this.attach(comp);
+		this.attach(comps);
 	}
 	
 	/**
-	 * Creates an Entity with a Collection of Component.
+	 * Creates an Entity with a Collection of Components.
 	 */
 	
 	public Entity(final Collection<Component> comps) {
 		this();
-		for (final Component comp : comps) {
-			this.attach(comp);
-		}
+		this.attach(comps);
 	}
 	
 	/**
@@ -135,6 +133,30 @@ public class Entity {
 			this.engine.notifySystems(this, EntityAction.ATTACH, compClass);
 		}
 		return oldComp;
+	}
+	
+	/**
+	 * Attach one to many Component to the Entity.
+	 * If there is already a Component for a Component class, detach it.
+	 * @param comps A Collection of Component.
+	 * @see detach
+	 */
+	public void attach(final Component... comps) {
+		for (final Component comp : comps) {
+			this.attach(comp);
+		}
+	}
+	
+	/**
+	 * Attach a Collection of Component to the Entity.
+	 * If there is already a Component for a Component class, detach it.
+	 * @param comps A Collection of Component.
+	 * @see detach
+	 */
+	public void attach(final Collection<Component> comps) {
+		for (final Component comp : comps) {
+			this.attach(comp);
+		}
 	}
 	
 	/**
