@@ -1,6 +1,6 @@
 package controller;
 
-public class CustomSystem extends ecs.System {
+public abstract class CustomSystem extends ecs.System {
 
 	protected IController controller;
 	
