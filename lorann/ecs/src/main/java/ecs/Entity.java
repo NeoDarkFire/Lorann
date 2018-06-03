@@ -44,7 +44,10 @@ public class Entity {
 	
 	/**
 	 * Creates an Entity with one to many Components.
+<<<<<<< HEAD
 	 * @param comps Components.
+=======
+>>>>>>> branch 'ecs' of https://github.com/NeoDarkFire/Lorann.git
 	 */
 	
 	public Entity(final Component... comps) {
@@ -54,7 +57,10 @@ public class Entity {
 	
 	/**
 	 * Creates an Entity with a Collection of Components.
+<<<<<<< HEAD
 	 * @param comps A Collection of Component.
+=======
+>>>>>>> branch 'ecs' of https://github.com/NeoDarkFire/Lorann.git
 	 */
 	
 	public Entity(final Collection<Component> comps) {
