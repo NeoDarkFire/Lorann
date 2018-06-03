@@ -4,9 +4,12 @@ public class CustomSystem extends ecs.System {
 
 	protected IController controller;
 	
-	public CustomSystem() {}
+	public CustomSystem() {
+		super();
+	}
 	
 	public CustomSystem(IController controller) {
+		super();
 		this.setController(controller);
 	}
 	

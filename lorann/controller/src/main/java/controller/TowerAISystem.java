@@ -1,8 +1,5 @@
 package controller;
 
-import java.awt.Point;
-import java.util.Collection;
-
 import ecs.Engine;
 import ecs.Entity;
 import model.Direction;
@@ -12,7 +9,7 @@ import model.Movement;
 import model.TileSolidity;
 import model.components.*;
 
-public class TowerAISystem extends CustomSystem{
+public class TowerAISystem extends CustomSystem {
 	{
 		targets.add(TowerAIComponent.class);
 		targets.add(MoveComponent.class);
@@ -29,64 +26,111 @@ public class TowerAISystem extends CustomSystem{
 		final int target_x = target.get(PositionComponent.class).pos.x;
 		final int target_y = target.get(PositionComponent.class).pos.y;
 		
-		int next_x, next_y;
-		
 		final ILevel level = this.controller.getCurrentLevel();
 		
 		for (final Entity e : this) {
 			move = e.get(MoveComponent.class);
 			pos = e.get(PositionComponent.class);
 			
-			/*
-			move.movement.setDirection(new Point(	target_x - pos.pos.x,
-													target_y - pos.pos.y	));
-			this.validateMove(move);
-			
-			next_x = pos.pos.x + move.movement.getX();
-			next_y = pos.pos.y + move.movement.getY();
-			
-			// Try 4 directions:
-			for (int i=1; i<=4; i++) {
+			// Reset the movement:
+			move.movement.setDirection(Direction.NONE);
+			// Get all the possible movement, sorted by priority:
+			final Movement[] moves = this.getMoveOrder(		target_x - pos.pos.x,
+															target_y - pos.pos.y	);
+			// Try every movements:
+			for (final Movement movement : moves) {
+				// Get potential next position:
+				final int next_x = pos.pos.x + movement.getX();
+				final int next_y = pos.pos.y + movement.getY();
+				// Get stuff potentially already there:
 				final ITile tile = level.getTileAt(next_x, next_y);
 				final Entity e2 = level.getEntityAt(next_x, next_y);
-				// If this tile is occupied:
+				
+				// Check if this tile is occupied:
 				if (tile.getSolidity() != TileSolidity.FREE
 				|| (e2 != null && e2.hasOne(SolidComponent.class, CollectibleComponent.class))) {
-					
+					continue;
 				}
-			}*/
-		}
-	}
-	
-	public Movement[] getMoveOrder(final int x, final int y) {
-		Movement[] moves = new Movement[4];
-		if (y < 0) {
-			if (Math.abs(x) > Math.abs(y)) {
-				if (x > 0) {
-					moves[1] = new Movement(Direction.R);
-					moves[2] = new Movement(Direction.U);
-					moves[3] = new Movement(Direction.L);
-					moves[4] = new Movement(Direction.D);
-				} else {
-					moves[1] = new Movement(Direction.L);
-					moves[2] = new Movement(Direction.U);
-					moves[1] = new Movement(Direction.R);
-					moves[2] = new Movement(Direction.D);
+				// The movement allows a kill:
+				else if (e2 != null && e2.has(KillableComponent.class)
+					 &&  e2.get(KillableComponent.class).weakness == DemonComponent.class) {
+					move.movement = movement;
+					break;
 				}
-			} else {
-				if (x > 0) {
-					moves[1] = new Movement(Direction.R);
-					moves[2] = new Movement(Direction.D);
-					moves[1] = new Movement(Direction.L);
-					moves[2] = new Movement(Direction.U);
-				} else {
-					moves[1] = new Movement(Direction.L);
-					moves[2] = new Movement(Direction.D);
-					moves[1] = new Movement(Direction.R);
-					moves[2] = new Movement(Direction.U);
+				// The tile is free:
+				else {
+					move.movement = movement;
+					break;
 				}
 			}
 		}
+	}
+	
+	protected Movement[] getMoveOrder(final int x, final int y) {
+		Movement[] moves = new Movement[4];
+		int u = 0, l = 0, d = 0, r = 0;  // The direction priorities (1: best, 4: worst)
+		// If the target is above:
+		if (y < 0) {
+			// If it's more horizontal than vertical:
+			if (Math.abs(x) > Math.abs(y)) {
+				u = 2;
+				d = 3;
+				// If it's to the right:
+				if (x > 0) {
+					r = 1;
+					l = 4;
+				} else {
+					l = 1;
+					r = 4;
+				}
+			}
+			// If it's more vertical:
+			else {
+				u = 1;
+				d = 4;
+				// If it's to the right:
+				if (x > 0) {
+					r = 2;
+					l = 3;
+				} else {
+					l = 2;
+					r = 3;
+				}
+			}
+		}
+		// If the target is below:
+		else {
+			// If it's more horizontal than vertical:
+			if (Math.abs(x) > Math.abs(y)) {
+				d = 2;
+				u = 3;
+				// If it's to the right:
+				if (x > 0) {
+					r = 1;
+					l = 4;
+				} else {
+					l = 1;
+					r = 4;
+				}
+			}
+			// If it's more vertical:
+			else {
+				d = 1;
+				u = 4;
+				// If it's to the right:
+				if (x > 0) {
+					r = 2;
+					l = 3;
+				} else {
+					l = 2;
+					r = 3;
+				}
+			}
+		}
+		moves[u-1] = new Movement(Direction.U);
+		moves[l-1] = new Movement(Direction.L);
+		moves[d-1] = new Movement(Direction.D);
+		moves[r-1] = new Movement(Direction.R);
 		return moves;
 	}
 }
