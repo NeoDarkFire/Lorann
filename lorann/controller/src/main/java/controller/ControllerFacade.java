@@ -54,7 +54,11 @@ public class ControllerFacade implements IController {
         this.engine.addSystem(new CollisionSystem(this));
         this.engine.addSystem(new MovementSystem(this));
         this.engine.addSystem(new AnimationSystem(this));
-        this.initLevel(this.model.getLevelByID(1));
+        try {
+			this.initLevel(this.model.getLevelByID(1));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
     }
 
     /**

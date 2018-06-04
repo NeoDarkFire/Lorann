@@ -10,6 +10,14 @@ public class UserInputSystem extends CustomSystem {
 		excluded.add(SpellAIComponent.class);
 	}
 	
+	public UserInputSystem() {
+		super();
+	}
+	
+	public UserInputSystem(IController controller) {
+		super(controller);
+	}
+	
 	public void update(Engine engine, int dt) {
 		
 	}

@@ -10,6 +10,14 @@ public class MovementSystem extends CustomSystem{
 		targets.add(MoveComponent.class);
 		targets.add(PositionComponent.class);
 	}
+	
+	public MovementSystem(IController controller) {
+		super(controller);
+	}
+	
+	public MovementSystem() {
+		super();
+	}
 
 	public void update(Engine engine, int dt) {
 		

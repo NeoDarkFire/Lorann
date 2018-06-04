@@ -10,6 +10,14 @@ public class LevelUpdaterSystem extends CustomSystem{
 		targets.add(Component.class);
 	}
 	
+	public LevelUpdaterSystem(IController controller) {
+		super(controller);
+	}
+	
+	public LevelUpdaterSystem() {
+		super();
+	}
+	
 	public void onEntityAdded(final Entity e) {
 		final ILevel level = this.controller.getCurrentLevel();
 		final IView view = this.controller.getView();

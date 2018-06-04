@@ -24,6 +24,14 @@ public class BishopAISystem extends CustomSystem{
 		targets.add(MoveComponent.class);
 		targets.add(PositionComponent.class);
 	}
+	
+	public BishopAISystem(IController controller) {
+		super(controller);
+	}
+	
+	public BishopAISystem() {
+		super();
+	}
 
 	// TODO: /!\ WARNING: update is the same as TowerAISystem /!\
 	public void update(final Engine engine, final int dt) {

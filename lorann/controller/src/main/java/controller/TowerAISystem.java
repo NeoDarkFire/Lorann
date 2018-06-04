@@ -15,6 +15,14 @@ public class TowerAISystem extends CustomSystem {
 		targets.add(MoveComponent.class);
 		targets.add(PositionComponent.class);
 	}
+	
+	public TowerAISystem(IController controller) {
+		super(controller);
+	}
+	
+	public TowerAISystem() {
+		super();
+	}
 
 	public void update(final Engine engine, final int dt) {
 		MoveComponent move;

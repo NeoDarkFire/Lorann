@@ -25,6 +25,14 @@ public class FollowAISystem extends CustomSystem{
 		targets.add(MoveComponent.class);
 		targets.add(PositionComponent.class);
 	}
+	
+	public FollowAISystem(IController controller) {
+		super(controller);
+	}
+	
+	public FollowAISystem() {
+		super();
+	}
 
 	// TODO: /!\ WARNING: update is the same as TowerAISystem /!\
 	public void update(final Engine engine, final int dt) {

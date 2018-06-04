@@ -18,6 +18,14 @@ public class DodgeAISystem extends CustomSystem{
 		targets.add(MoveComponent.class);
 		targets.add(PositionComponent.class);
 	}
+	
+	public DodgeAISystem(IController controller) {
+		super(controller);
+	}
+	
+	public DodgeAISystem() {
+		super();
+	}
 
 	// TODO: parameterise an abstract system to avoid copy-pasted code.
 	
