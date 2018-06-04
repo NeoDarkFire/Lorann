@@ -48,6 +48,7 @@ public class ControllerFacade implements IController {
      * @throws SQLException
      *             the SQL exception
      */
+    @Override
     public void start() {
 //        this.getView().displayMessage(this.getModel().getExampleById(1).toString());
 //
@@ -67,6 +68,7 @@ public class ControllerFacade implements IController {
      *
      * @return the view
      */
+    @Override
     public IView getView() {
         return this.view;
     }
@@ -76,14 +78,17 @@ public class ControllerFacade implements IController {
      *
      * @return the model
      */
+    @Override
     public IModel getModel() {
         return this.model;
     }
     
+    @Override
     public ILevel getCurrentLevel() {
     	return this.level;
     }
     
+    @Override
     public void nexLevel() {
     	
     }

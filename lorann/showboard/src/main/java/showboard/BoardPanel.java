@@ -146,6 +146,18 @@ class BoardPanel extends JPanel implements Observer {
     public final void addPawn(final IPawn pawn) {
         this.getPawns().add(pawn);
     }
+    
+    /**
+     * Removes a pawn.
+     *
+     * @author Alexis SKRZYNSKI (alexis.skrzynski@viacesi.fr) aka NeoDarkFire
+     *
+     * @param pawn
+     *            the pawn
+     */
+    public final void removePawn(final IPawn pawn) {
+        this.getPawns().remove(pawn);
+    }
 
     /**
      * Gets the image XY.

@@ -1,5 +1,6 @@
 package controller;
 
+import model.ILevel;
 import model.IModel;
 import view.IView;
 
@@ -14,5 +15,7 @@ public interface IController {
 	public void start();
 	public IView getView();
 	public IModel getModel();
+	ILevel getCurrentLevel();
+	void nexLevel();
 
 }

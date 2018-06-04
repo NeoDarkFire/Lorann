@@ -1,8 +1,8 @@
 package model;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.sql.SQLException;
-import java.util.List;
 
 /**
  * <h1>The Interface IModel.</h1>
@@ -43,7 +43,8 @@ public interface IModel {
      */
 //    List<Example> getAllExamples() throws SQLException;
 
-    public ILevel getLevelByID(int id);
-    public void saveFromFile(File file);
+    public ILevel getLevelByID(int id) throws SQLException;
+    public void saveFromFile(File file, int mapID) throws FileNotFoundException, SQLException;
+    public void saveFromFile(File file) throws FileNotFoundException, SQLException;
 
 }

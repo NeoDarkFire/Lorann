@@ -43,23 +43,29 @@ public class Entity {
 	}
 	
 	/**
-	 * Creates an Entity with one specified Component.
+	 * Creates an Entity with one to many Components.
+<<<<<<< HEAD
+	 * @param comps Components.
+=======
+>>>>>>> branch 'ecs' of https://github.com/NeoDarkFire/Lorann.git
 	 */
 	
-	public Entity(final Component comp) {
+	public Entity(final Component... comps) {
 		this();
-		this.attach(comp);
+		this.attach(comps);
 	}
 	
 	/**
-	 * Creates an Entity with a Collection of Component.
+	 * Creates an Entity with a Collection of Components.
+<<<<<<< HEAD
+	 * @param comps A Collection of Component.
+=======
+>>>>>>> branch 'ecs' of https://github.com/NeoDarkFire/Lorann.git
 	 */
 	
 	public Entity(final Collection<Component> comps) {
 		this();
-		for (final Component comp : comps) {
-			this.attach(comp);
-		}
+		this.attach(comps);
 	}
 	
 	/**
@@ -138,6 +144,30 @@ public class Entity {
 	}
 	
 	/**
+	 * Attach one to many Component to the Entity.
+	 * If there is already a Component for a Component class, detach it.
+	 * @param comps Components.
+	 * @see detach
+	 */
+	public void attach(final Component... comps) {
+		for (final Component comp : comps) {
+			this.attach(comp);
+		}
+	}
+	
+	/**
+	 * Attach a Collection of Component to the Entity.
+	 * If there is already a Component for a Component class, detach it.
+	 * @param comps A Collection of Component.
+	 * @see detach
+	 */
+	public void attach(final Collection<Component> comps) {
+		for (final Component comp : comps) {
+			this.attach(comp);
+		}
+	}
+	
+	/**
 	 * Detaches a Component from the Entity.
 	 * @param compClass The class of the Component to detach.
 	 * @return the old Component.
@@ -151,23 +181,34 @@ public class Entity {
 	}
 	
 	/**
+	 * Detaches one to many Component from the Entity.
+	 * @param compClasses The classes of the Components to detach.
+	 */
+	@SafeVarargs
+	final public <C extends Component> void detach(final Class<C>... compClasses) {
+		for (final Class<C> compClass : compClasses) {
+			this.detach(compClass);
+		}
+	}
+	
+	/**
+	 * Detaches a Collection of Component from the Entity.
+	 * @param compClasses A Collection of the class of the Components to detach.
+	 */
+	public <C extends Component> void detach(final Collection<Class<C>> compClasses) {
+		for (final Class<C> compClass : compClasses) {
+			this.detach(compClass);
+		}
+	}
+	
+	/**
 	 * Gets the Component attached to the Entity.
 	 * @param compClass The class of the Component.
 	 * @return The Component.
 	 */
-	public Component get(final Class<? extends Component> compClass) {
-		return this.components.get(compClass);
-	}
-	
-	/**
-	 * Updates the Component associated without notifying the Engine.
-	 * A Component must already be registered with the Entity.
-	 * @param compClass The class of the Component.
-	 * @param comp The Component.
-	 * @return The old Component.
-	 */
-	public Component set(final Class<? extends Component> compClass, final Component comp) {
-		return this.components.replace(compClass, comp);
+	@SuppressWarnings("unchecked")
+	public <C extends Component> C get(final Class<C> compClass) {
+		return (C) this.components.get(compClass);
 	}
 	
 	/**
@@ -184,7 +225,8 @@ public class Entity {
 	 * @return True if the Entity has the Component.
 	 */
 	public boolean has(final Class<? extends Component> compClass) {
-		return this.components.containsKey(compClass);
+		return this.components.containsKey(compClass)
+			|| (compClass == Component.class && this.components.size() > 0);
 	}
 	
 	/**
@@ -192,13 +234,57 @@ public class Entity {
 	 * @param compClasses A Collection of Component classes.
 	 * @return True if the Entity has all the Components.
 	 */
-	public boolean has(final Collection<Class<? extends Component>> compClasses) {
+	public boolean hasAll(final Collection<Class<? extends Component>> compClasses) {
 		for (Class<? extends Component> compClass : compClasses) {
 			if (!this.has(compClass)) {
 				return false;
 			}
 		}
 		return true;
+	}
+	
+	/**
+	 * Get whether if the Entity has multiple specified Components.
+	 * @param compClasses Component classes.
+	 * @return True if the Entity has all the Components.
+	 */
+	@SafeVarargs
+	final public <C extends Component> boolean hasAll(final Class<C>... compClasses) {
+		for (Class<C> compClass : compClasses) {
+			if (!this.has(compClass)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	/**
+	 * Get whether if the Entity has one out of many specified Components.
+	 * @param compClasses A Collection of Component classes.
+	 * @return True if the Entity has one of the Components.
+	 */
+	public boolean hasOne(final Collection<Class<? extends Component>> compClasses) {
+		for (Class<? extends Component> compClass : compClasses) {
+			if (this.has(compClass)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * Get whether if the Entity has one out of many specified Components.
+	 * @param compClasses Component classes.
+	 * @return True if the Entity has one of the Components.
+	 */
+	@SafeVarargs
+	final public boolean hasOne(final Class<? extends Component>... compClasses) {
+		for (Class<? extends Component> compClass : compClasses) {
+			if (this.has(compClass)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

@@ -4,6 +4,6 @@ import ecs.Component;
 
 public class KillableComponent implements Component {
 	
-	public Class<Component> weakness;
+	public Class<? extends Component> weakness;
 
 }

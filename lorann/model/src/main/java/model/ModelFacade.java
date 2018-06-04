@@ -1,13 +1,19 @@
 package model;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.List;
 
+<<<<<<< HEAD
+=======
+import model.dao.LevelDAO;
+
+>>>>>>> refs/heads/master
 /**
  * <h1>The Class ModelFacade provides a facade of the Model component.</h1>
  *
- * @author Jean-Aymeric DIET jadiet@cesi.fr
+ * @author Alexis SKRZYNSKI (alexis.skrzynski@viacesi.fr) aka NeoDarkFire
  * @version 1.0
  */
 public final class ModelFacade implements IModel {
@@ -18,9 +24,13 @@ public final class ModelFacade implements IModel {
     public ModelFacade() {
         super();
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/heads/master
 
 	@Override
+<<<<<<< HEAD
 	public ILevel getLevelByID(int id) {
 		// TODO Auto-generated method stub
 		return null;
@@ -32,4 +42,22 @@ public final class ModelFacade implements IModel {
 		
 	}
 
+=======
+	public ILevel getLevelByID(int id) throws SQLException {
+		MapData map = LevelDAO.getMapWithID(id);
+		List<CellData> cells = LevelDAO.getCellsByMapID(id);
+		LevelData levelData = new LevelData(cells, map);
+		return (ILevel) new Level(levelData);
+	}
+	
+	@Override
+	public void saveFromFile(File file, int mapID) throws FileNotFoundException, SQLException {
+		LevelDAO.saveFromFile(file, mapID);
+	}
+	
+	@Override
+	public void saveFromFile(File file) throws FileNotFoundException, SQLException {
+		LevelDAO.saveFromFile(file);
+	}
+>>>>>>> refs/heads/master
 }

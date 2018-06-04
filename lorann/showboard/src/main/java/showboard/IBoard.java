@@ -35,6 +35,16 @@ public interface IBoard {
      *            the pawn
      */
     void addPawn(IPawn pawn);
+    
+    /**
+     * Removes a pawn.
+     *
+     * @author Alexis SKRZYNSKI (alexis.skrzynski@viacesi.fr) aka NeoDarkFire
+     *
+     * @param pawn
+     *            the pawn
+     */
+    void removePawn(IPawn pawn);
 
     /**
      * Gets the observer.
