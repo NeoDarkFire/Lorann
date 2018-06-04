@@ -1,8 +1,7 @@
 package view;
 
+import java.awt.event.KeyEvent;
 import java.util.HashMap;
-
-import javax.swing.JOptionPane;
 
 import ecs.Entity;
 import model.Direction;
@@ -19,12 +18,25 @@ public class ViewFacade implements IView {
 	private Renderer renderer;
 	private HashMap<Entity, Sprite> sprites;
 	private InputHandler handler;
+	
+	static private HashMap<Integer, Action> keyMap = new HashMap<>();
+	static {
+		keyMap.put(KeyEvent.VK_LEFT, Action.LEFT);
+		keyMap.put(KeyEvent.VK_RIGHT, Action.RIGHT);
+		keyMap.put(KeyEvent.VK_UP, Action.UP);
+		keyMap.put(KeyEvent.VK_DOWN, Action.DOWN);
+		keyMap.put(KeyEvent.VK_SPACE, Action.SPELL);
+	}
 
     /**
      * Instantiates a new view facade.
      */
     public ViewFacade() {
-        super();
+    	final HashMap<Action, Boolean> inputMap = new HashMap<>();
+        this.renderer = new Renderer();
+        this.handler = new UserInputHandler(inputMap);
+        this.renderer.setKeyListener(new MKeyListener(this.handler, keyMap));
+        this.sprites = new HashMap<>();
     }
     
     
@@ -36,7 +48,8 @@ public class ViewFacade implements IView {
 	 */
     @Override
     public void addSprite(Entity entity) {
-    	
+    	this.sprites.put(entity, new Sprite(entity));
+    	this.renderer.addSprite(this.sprites.get(entity));
     }
     
     /**
@@ -47,6 +60,8 @@ public class ViewFacade implements IView {
 	 */
     @Override
     public void removeSprite(Entity entity) {
+    	this.renderer.removeSprite(this.sprites.get(entity));
+    	this.sprites.remove(entity);
     	
     }
     
@@ -59,7 +74,8 @@ public class ViewFacade implements IView {
 	 */
     @Override
     public void displayLevel(ILevel level) {
-    	
+    	this.renderer.setLevel(level);
+    	this.refresh();
     }
     
     
@@ -73,7 +89,7 @@ public class ViewFacade implements IView {
 	 */
     @Override
     public boolean isPressed(Action input) {
-    	return false;
+    	return (this.handler.isPressed(input));
     }
     
     
@@ -87,7 +103,7 @@ public class ViewFacade implements IView {
 	 */
     @Override
     public boolean isReleased(Action input) {
-    	return false;
+    	return (this.handler.isReleased(input));
     }
     
     
@@ -97,12 +113,12 @@ public class ViewFacade implements IView {
 	 */
     @Override
     public Direction getInputDirection() {
-    	return null;
+    	return (this.handler.getInputDirection());
     }
     
     @Override
     public void refresh() {
-    	
+    	this.renderer.refresh();
     }
 
 }

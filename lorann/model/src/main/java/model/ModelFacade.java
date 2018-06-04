@@ -5,7 +5,9 @@ import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.List;
 
+
 import model.dao.LevelDAO;
+
 
 /**
  * <h1>The Class ModelFacade provides a facade of the Model component.</h1>
@@ -22,6 +24,7 @@ public final class ModelFacade implements IModel {
         super();
     }
 
+
 	@Override
 	public ILevel getLevelByID(int id) throws SQLException {
 		MapData map = LevelDAO.getMapWithID(id);
@@ -34,9 +37,12 @@ public final class ModelFacade implements IModel {
 	public void saveFromFile(File file, int mapID) throws FileNotFoundException, SQLException {
 		LevelDAO.saveFromFile(file, mapID);
 	}
-	
+
+
 	@Override
 	public void saveFromFile(File file) throws FileNotFoundException, SQLException {
-		LevelDAO.saveFromFile(file);
+		// TODO Auto-generated method stub
+		
 	}
+	
 }

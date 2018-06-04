@@ -14,14 +14,13 @@ import java.util.HashMap;
 public class MKeyListener extends KeyAdapter {
 	
 	private InputHandler handler;
-	private HashMap<KeyEvent, Action> keyMap;
+	private HashMap<Integer, Action> keyMap;
 	
-	public MKeyListener(InputHandler handler, HashMap<KeyEvent, Action> keyMap) {
+	public MKeyListener(InputHandler handler, HashMap<Integer, Action> keyMap) {
 		this.handler = handler;
 		this.keyMap = keyMap;
 	}
-	
-	
+
 	/**
 	 * Used when a key is pressed
 	 * 
@@ -29,7 +28,9 @@ public class MKeyListener extends KeyAdapter {
 	 * 
 	 */
 	public void keyPressed(KeyEvent e) {
-		
+		if (this.keyMap.containsKey(e.getKeyCode())) {
+			this.handler.press(this.keyMap.get(e.getKeyCode()));
+		}
 	}
 	
 	/**
@@ -39,7 +40,9 @@ public class MKeyListener extends KeyAdapter {
 	 * 
 	 */
 	public void keyReleased(KeyEvent e) {
-		
+		if (this.keyMap.containsKey(e.getKeyCode())) {
+			this.handler.release(this.keyMap.get(e.getKeyCode()));
+		}
 	}
 	
 
