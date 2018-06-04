@@ -103,7 +103,7 @@ public class Renderer extends Observable implements Runnable{
 			}
 		}
 		
-		if (this.keyListener != null && this.frame.getKeyListeners().length > 0) {
+		if (this.keyListener != null && this.frame.getKeyListeners().length == 0) {
 			this.frame.addKeyListener(this.keyListener);
 		}
 	}

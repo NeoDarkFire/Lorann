@@ -22,7 +22,7 @@ class TestSystem extends ecs.System {
 	}
 	
 	@Override
-	public void update(final Engine engine, final int dt) {
+	public void update(final Engine engine, final double dt) {
 		for (final Entity e : this) {
 			e.get(C1.class).test++;
 		}

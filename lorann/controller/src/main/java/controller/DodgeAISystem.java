@@ -30,7 +30,8 @@ public class DodgeAISystem extends CustomSystem{
 	// TODO: parameterise an abstract system to avoid copy-pasted code.
 	
 	// TODO: /!\ WARNING: update is the same as TowerAISystem /!\
-	public void update(final Engine engine, final int dt) {
+	@Override
+	public void update(final Engine engine, final double dt) {
 		MoveComponent move;
 		PositionComponent pos;
 		

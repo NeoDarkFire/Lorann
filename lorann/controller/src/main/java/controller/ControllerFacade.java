@@ -51,6 +51,7 @@ public class ControllerFacade implements IController {
 			this.initLevel( level );
 			
 			this.engine.addSystem(new LevelUpdaterSystem(this));
+			
 			this.engine.addSystem(new UserInputSystem(this));
 			this.engine.addSystem(new SpellAISystem(this));
 			this.engine.addSystem(new FollowAISystem(this));
@@ -60,6 +61,8 @@ public class ControllerFacade implements IController {
 			this.engine.addSystem(new CollisionSystem(this));
 			this.engine.addSystem(new MovementSystem(this));
 			this.engine.addSystem(new AnimationSystem(this));
+			
+			this.engine.addSystem(new GateSystem(this));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -74,13 +77,13 @@ public class ControllerFacade implements IController {
     @Override
     public void start() {
     	long currentTime;
-    	long dt;
+    	double dt;
     	while (true) {
     		currentTime = System.currentTimeMillis();
-	    	dt = currentTime - lastTime;
-	    	if (dt >= 1000.0/5.0) {
+	    	dt = (currentTime - lastTime)/1000.0;
+	    	if (dt >= 1/6.0) {
 	    		this.lastTime = currentTime;
-	    		engine.update((int) (dt/1000));
+	    		engine.update(dt);
 	    		this.view.refresh();
 	    	}
     	}
@@ -131,7 +134,6 @@ public class ControllerFacade implements IController {
     
     public void initLevel(ILevel level) {
 		this.level = level;
-		java.lang.System.out.println(this.level.getEntities());
 		for (final Entity e : this.level.getEntities()) {
 			engine.addEntity(e);
 		}

@@ -69,7 +69,7 @@ public class UserInputHandler implements InputHandler{
 	 */
 	
 	public boolean isPressed(Action input) {
-		return (this.inputMap.get(input) == true);
+		return this.inputMap.get(input);
 	}
 	
 	/**
@@ -82,7 +82,7 @@ public class UserInputHandler implements InputHandler{
 	 */
 	
 	public boolean isReleased(Action input) {
-		return (this.inputMap.get(input) == false);
+		return !this.inputMap.get(input);
 	}
 	
 	

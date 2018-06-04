@@ -27,6 +27,7 @@ public class LevelUpdaterSystem extends CustomSystem{
 
 	}
 	
+	@Override
 	public void onEntityRemoved(Entity e) {
 		final ILevel level = this.controller.getCurrentLevel();
 		final IView view = this.controller.getView();

@@ -226,7 +226,7 @@ public final class Engine {
 	 * Processes all Systems
 	 * @param dt Delta-time, the amount of time elapsed since last update.
 	 */
-	final public void update(int dt) {
+	final public void update(final double dt) {
 		for (final System sys : this.orderedSystems) {
 			sys.update(this, dt);
 		}

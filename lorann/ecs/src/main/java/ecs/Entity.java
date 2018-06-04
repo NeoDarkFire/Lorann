@@ -99,11 +99,14 @@ public class Entity {
 	 * If the Entity has components, destroy them.
 	 * If the Entity is registered to an Engine, tells it to discard the Entity. 
 	 */
-	public void destroy() {
+	public <C extends Component> void destroy() {
 		if (this.engine != null) {
 			this.engine.getNotification(this, EntityAction.DESTROY);
 		}
-		for (final Class<? extends Component> compClass : this.components.keySet()) {
+		@SuppressWarnings("unchecked")
+		final Class<C>[] compClasses = new Class[this.components.size()];
+		this.components.keySet().toArray(compClasses);
+		for (final Class<C> compClass : compClasses) {
 			this.detach(compClass);
 		}
 	}
@@ -249,8 +252,8 @@ public class Entity {
 	 * @return True if the Entity has all the Components.
 	 */
 	@SafeVarargs
-	final public <C extends Component> boolean hasAll(final Class<C>... compClasses) {
-		for (Class<C> compClass : compClasses) {
+	final public boolean hasAll(final Class<? extends Component>... compClasses) {
+		for (Class<? extends Component> compClass : compClasses) {
 			if (!this.has(compClass)) {
 				return false;
 			}

@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 
+import ecs.Entity;
+
 /**
  * <h1>The Interface IModel.</h1>
  *
@@ -46,5 +48,7 @@ public interface IModel {
     public ILevel getLevelByID(int id) throws SQLException;
     public void saveFromFile(File file, int mapID) throws FileNotFoundException, SQLException;
     public void saveFromFile(File file) throws FileNotFoundException, SQLException;
+	public Entity createSpell();
+	public Entity createDoor();
 
 }

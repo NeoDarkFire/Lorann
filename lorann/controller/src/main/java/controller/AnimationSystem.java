@@ -20,7 +20,8 @@ public class AnimationSystem extends CustomSystem{
 		super();
 	}
 
-	public void update(Engine engine, int dt) {
+	@Override
+	public void update(final Engine engine, final double dt) {
 		
 		AnimationComponent animation;
 		DrawableComponent drawable;

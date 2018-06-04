@@ -65,6 +65,9 @@ public abstract class EntityFactory {
 		SolidComponent solid = new SolidComponent();
 		solid.type = CollisionType.STOP;
 		
+		SpellCasterComponent spellCaster = new SpellCasterComponent();
+		spellCaster.spellMovement = new Movement(Direction.NONE);
+		
 		e.attach(pos);
 		e.attach(move);
 		e.attach(player);
@@ -72,6 +75,7 @@ public abstract class EntityFactory {
 		e.attach(killable);
 		e.attach(drawable);
 		e.attach(animation);
+		e.attach(spellCaster);
 		e.attach(solid);
 		
 		return e;
@@ -145,7 +149,7 @@ public abstract class EntityFactory {
 		animation.images = new ArrayList<>();
 		try {
 			for (int i = 1; i <= 5; i++) {
-				animation.images.add(ImageIO.read(new File(classLoader.getResource("spell" + i + ".png").getFile())));
+				animation.images.add(ImageIO.read(new File(classLoader.getResource("spell_" + i + ".png").getFile())));
 			}
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -191,10 +195,13 @@ public abstract class EntityFactory {
 		SolidComponent solid = new SolidComponent();
 		solid.type = CollisionType.STOP;
 		
+		ExitComponent exit = new ExitComponent();
+		
 		e.attach(demon);
 		e.attach(pos);
 		e.attach(drawable);
 		e.attach(solid);
+		e.attach(exit);
 		
 		return e;
 	}

@@ -24,7 +24,8 @@ public class TowerAISystem extends CustomSystem {
 		super();
 	}
 
-	public void update(final Engine engine, final int dt) {
+	@Override
+	public void update(final Engine engine, final double dt) {
 		MoveComponent move;
 		PositionComponent pos;
 		

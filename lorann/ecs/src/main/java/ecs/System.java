@@ -155,7 +155,7 @@ public abstract class System implements Iterable<Entity> {
 	 * @param engine An Engine
 	 * @param dt The delta time, the amount of time elapsed since the last update.
 	 */
-	public void update(final Engine engine, final int dt) {
+	public void update(final Engine engine, final double dt) {
 	}
 
 	/**
