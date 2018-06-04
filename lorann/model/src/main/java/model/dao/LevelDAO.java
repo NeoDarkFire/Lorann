@@ -82,9 +82,9 @@ public abstract class LevelDAO extends AbstractDAO {
 	
 	private static void insertCell(final CellData cell) throws SQLException {
 		final CallableStatement callStatement = prepareCall(sqlInsertCell);
-        callStatement.setInt(1, cell.getID());
-        callStatement.setInt(2, cell.getX());
-        callStatement.setInt(3, cell.getY());
+        callStatement.setInt(1, cell.getX());
+        callStatement.setInt(2, cell.getY());
+        callStatement.setString(3, "" + cell.getSymbol());
         callStatement.setInt(4, cell.getMapID());
         callStatement.execute();
 	}
