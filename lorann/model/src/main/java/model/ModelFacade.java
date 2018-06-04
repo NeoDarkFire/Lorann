@@ -25,9 +25,17 @@ public final class ModelFacade implements IModel {
 	@Override
 	public ILevel getLevelByID(int id) throws SQLException {
 		MapData map = LevelDAO.getMapWithID(id);
+		if (map == null) {
+			return null;
+		}
 		List<CellData> cells = LevelDAO.getCellsByMapID(id);
-		LevelData levelData = new LevelData(cells, map);
-		return (ILevel) new Level(levelData);
+		if (cells.size() > 0) {
+			LevelData levelData = new LevelData(cells, map);
+			return (ILevel) new Level(levelData);
+		}
+		else {
+			return null;
+		}
 	}
 	
 	@Override

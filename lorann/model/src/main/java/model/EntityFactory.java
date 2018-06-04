@@ -153,6 +153,8 @@ public abstract class EntityFactory {
 
 		SpellAIComponent ai = new SpellAIComponent();
 		
+		InputComponent input = new InputComponent();
+		
 		e.attach(spell);
 		e.attach(pos);
 		e.attach(move);
@@ -161,6 +163,7 @@ public abstract class EntityFactory {
 		e.attach(animation);
 		e.attach(solid);
 		e.attach(ai);
+		e.attach(input);
 		
 		return e;
 	}

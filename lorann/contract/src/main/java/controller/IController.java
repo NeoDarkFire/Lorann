@@ -16,6 +16,6 @@ public interface IController {
 	public IView getView();
 	public IModel getModel();
 	ILevel getCurrentLevel();
-	void nexLevel();
+	void nextLevel();
 
 }

@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import ecs.Engine;
+import ecs.Entity;
 import model.ILevel;
 import model.IModel;
 import view.IView;
@@ -27,6 +28,9 @@ public class ControllerFacade implements IController {
     
     /** The level. */
     private ILevel level;
+    
+    /** The time of the last update. */
+    private long lastTime;
 
     /**
      * Instantiates a new controller facade.
@@ -40,6 +44,17 @@ public class ControllerFacade implements IController {
         this.view = view;
         this.model = model;
         this.engine = new Engine();
+        this.engine.addSystem(new LevelUpdaterSystem(this));
+        this.engine.addSystem(new UserInputSystem(this));
+        this.engine.addSystem(new SpellAISystem(this));
+        this.engine.addSystem(new FollowAISystem(this));
+        this.engine.addSystem(new TowerAISystem(this));
+        this.engine.addSystem(new DodgeAISystem(this));
+        this.engine.addSystem(new BishopAISystem(this));
+        this.engine.addSystem(new CollisionSystem(this));
+        this.engine.addSystem(new MovementSystem(this));
+        this.engine.addSystem(new AnimationSystem(this));
+        this.initLevel(this.model.getLevelByID(1));
     }
 
     /**
@@ -50,17 +65,12 @@ public class ControllerFacade implements IController {
      */
     @Override
     public void start() {
-//        this.getView().displayMessage(this.getModel().getExampleById(1).toString());
-//
-//        this.getView().displayMessage(this.getModel().getExampleByName("Example 2").toString());
-//
-//        final List<Example> examples = this.getModel().getAllExamples();
-//        final StringBuilder message = new StringBuilder();
-//        for (final Example example : examples) {
-//            message.append(example);
-//            message.append('\n');
-//        }
-//        this.getView().displayMessage(message.toString());
+    	long currentTime = System.currentTimeMillis();
+    	long dt = currentTime - lastTime;
+    	if (dt >= 1000.0/10.0) {
+    		this.lastTime = currentTime;
+    		engine.update((int) (dt/1000));
+    	}
     }
 
     /**
@@ -89,7 +99,28 @@ public class ControllerFacade implements IController {
     }
     
     @Override
-    public void nexLevel() {
+    public void nextLevel() {
+    	int id = this.level.getID() + 1;
+    	final ILevel level;
     	
+    	try {
+    		level = this.model.getLevelByID(id);
+			if (level != null) {
+				for (final Entity e : this.level.getEntities()) {
+					e.destroy();
+				}
+				this.initLevel(level);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    }
+    
+    public void initLevel(ILevel level) {
+		this.level = level;
+		for (final Entity e : this.level.getEntities()) {
+			engine.addEntity(e);
+		}
+		this.view.displayLevel(this.level);
     }
 }
