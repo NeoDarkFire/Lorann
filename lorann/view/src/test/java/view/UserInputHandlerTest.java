@@ -17,8 +17,7 @@ public class UserInputHandlerTest {
 	
 	@Before
 	public void setUp() {
-		this.inputMap = new HashMap<>();
-		this.handler = new UserInputHandler(this.inputMap);
+		this.handler = new UserInputHandler();
 	}
 
 	@After

@@ -7,6 +7,7 @@ import ecs.Engine;
 import ecs.Entity;
 import model.ILevel;
 import model.IModel;
+import model.components.PlayerComponent;
 import view.IView;
 
 /**
@@ -41,23 +42,26 @@ public class ControllerFacade implements IController {
      *            the model
      */
     public ControllerFacade(final IView view, final IModel model) {
-        this.view = view;
-        this.model = model;
-        this.engine = new Engine();
-        this.engine.addSystem(new LevelUpdaterSystem(this));
-        this.engine.addSystem(new UserInputSystem(this));
-        this.engine.addSystem(new SpellAISystem(this));
-        this.engine.addSystem(new FollowAISystem(this));
-        this.engine.addSystem(new TowerAISystem(this));
-        this.engine.addSystem(new DodgeAISystem(this));
-        this.engine.addSystem(new BishopAISystem(this));
-        this.engine.addSystem(new CollisionSystem(this));
-        this.engine.addSystem(new MovementSystem(this));
-        this.engine.addSystem(new AnimationSystem(this));
-        try {
-			this.initLevel(this.model.getLevelByID(1));
-		} catch (SQLException e) {
-			e.printStackTrace();
+    	this.view = view;
+		this.model = model;
+		this.engine = new Engine();
+    	try {
+        	final ILevel level = this.model.getLevelByID(1);
+        	this.view.setLevel(level);
+			this.initLevel( level );
+			
+			this.engine.addSystem(new LevelUpdaterSystem(this));
+			this.engine.addSystem(new UserInputSystem(this));
+			this.engine.addSystem(new SpellAISystem(this));
+			this.engine.addSystem(new FollowAISystem(this));
+			this.engine.addSystem(new TowerAISystem(this));
+			this.engine.addSystem(new DodgeAISystem(this));
+			this.engine.addSystem(new BishopAISystem(this));
+			this.engine.addSystem(new CollisionSystem(this));
+			this.engine.addSystem(new MovementSystem(this));
+			this.engine.addSystem(new AnimationSystem(this));
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
     }
 
@@ -69,11 +73,16 @@ public class ControllerFacade implements IController {
      */
     @Override
     public void start() {
-    	long currentTime = System.currentTimeMillis();
-    	long dt = currentTime - lastTime;
-    	if (dt >= 1000.0/10.0) {
-    		this.lastTime = currentTime;
-    		engine.update((int) (dt/1000));
+    	long currentTime;
+    	long dt;
+    	while (true) {
+    		currentTime = System.currentTimeMillis();
+	    	dt = currentTime - lastTime;
+	    	if (dt >= 1000.0/5.0) {
+	    		this.lastTime = currentTime;
+	    		engine.update((int) (dt/1000));
+	    		this.view.refresh();
+	    	}
     	}
     }
 
@@ -122,9 +131,9 @@ public class ControllerFacade implements IController {
     
     public void initLevel(ILevel level) {
 		this.level = level;
+		java.lang.System.out.println(this.level.getEntities());
 		for (final Entity e : this.level.getEntities()) {
 			engine.addEntity(e);
 		}
-		this.view.displayLevel(this.level);
     }
 }

@@ -16,9 +16,9 @@ public class UserInputHandler implements InputHandler{
 	private HashMap<Action, Boolean> inputMap;
 	
 	
-	public UserInputHandler(HashMap<Action, Boolean> inputMap) {
-		this.inputMap = inputMap;
-		for (final Action input : this.inputMap.keySet()) {
+	public UserInputHandler() {
+		this.inputMap = new HashMap<>();
+		for (final Action input : Action.values()) {
 			this.inputMap.put(input, false);
 		}
 	}

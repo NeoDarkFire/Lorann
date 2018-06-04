@@ -26,7 +26,7 @@ public class Renderer extends Observable implements Runnable{
 	
 	
 	public Renderer() {
-		SwingUtilities.invokeLater(this);
+//		SwingUtilities.invokeLater(this);
 	}
 	
 	/**
@@ -38,9 +38,10 @@ public class Renderer extends Observable implements Runnable{
 	
 	public void setLevel(ILevel level) {
 		this.level = level;
-		if (this.frame != null) {
-			this.updateFrame();
+		if (this.frame == null) {
+			run();
 		}
+		this.updateFrame();
 		
 	}
 	
@@ -52,6 +53,7 @@ public class Renderer extends Observable implements Runnable{
 	public void run() {
 		this.setupFrame();
 		this.frame.setVisible(true);
+		this.addObserver(this.frame.getObserver());
 	}
 	
 	/**
@@ -87,21 +89,21 @@ public class Renderer extends Observable implements Runnable{
 	
 	private void updateFrame() {
 		int width, height;
-		width = (this.level != null) ? this.level.getWidth() : 1;
-		height = (this.level != null) ? this.level.getHeight() : 1;
+		width = this.level.getWidth();
+		height = this.level.getHeight();
 		this.frame.setDimension(new Dimension(width, height));
 		this.frame.setDisplayFrame(new Rectangle(0, 0, width, height));
 		this.frame.setSize(width*64, height*64);
 		
 		ISquare square;
-		for (int y = 0; y < this.level.getHeight(); y++) {
-			for (int x = 0; x < this.level.getWidth(); x++) {
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
 				square = this.level.getTileAt(x, y);
 				this.frame.addSquare(square, x, y);
 			}
 		}
 		
-		if (this.keyListener != null && this.frame.getKeyListeners()[0] != this.keyListener) {
+		if (this.keyListener != null && this.frame.getKeyListeners().length > 0) {
 			this.frame.addKeyListener(this.keyListener);
 		}
 	}
