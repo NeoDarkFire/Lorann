@@ -25,19 +25,19 @@ public class Sprite implements IPawn {
 
 	@Override
 	public Image getImage() {
-		final DrawableComponent comp = (DrawableComponent) this.entity.get(DrawableComponent.class);
+		final DrawableComponent comp = this.entity.get(DrawableComponent.class);
 		return comp.image;
 	}
 
 	@Override
 	public int getX() {
-		final PositionComponent comp = (PositionComponent) this.entity.get(PositionComponent.class);
+		final PositionComponent comp = this.entity.get(PositionComponent.class);
 		return (int) comp.pos.getX();
 	}
 
 	@Override
 	public int getY() {
-		final PositionComponent comp = (PositionComponent) this.entity.get(PositionComponent.class);
+		final PositionComponent comp = this.entity.get(PositionComponent.class);
 		return (int) comp.pos.getY();
 	}
 

@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;
+import java.awt.event.KeyListener;
 import java.util.Observable;
 
 import javax.swing.SwingUtilities;
@@ -21,10 +22,10 @@ public class Renderer extends Observable implements Runnable{
 	
 	private ILevel level;
 	private BoardFrame frame;
+	private KeyListener keyListener;
 	
 	
-	public Renderer(ILevel level) {
-		this.setLevel(level);
+	public Renderer() {
 		SwingUtilities.invokeLater(this);
 	}
 	
@@ -44,19 +45,13 @@ public class Renderer extends Observable implements Runnable{
 	}
 	
 	private void setupFrame() {
-		int width, height;
-		width = this.level.getWidth();
-		height = this.level.getHeight();
 		this.frame = new BoardFrame("Lorann");
-		this.frame.setDimension(new Dimension(width, height));
-		this.frame.setDisplayFrame(new Rectangle(0,0,width, height));
-		this.frame.setSize(width*64, height*64);
-		this.frame.setVisible(true);
 		this.updateFrame();
 	}
 	
 	public void run() {
 		this.setupFrame();
+		this.frame.setVisible(true);
 	}
 	
 	/**
@@ -91,6 +86,13 @@ public class Renderer extends Observable implements Runnable{
 	}
 	
 	private void updateFrame() {
+		int width, height;
+		width = (this.level != null) ? this.level.getWidth() : 1;
+		height = (this.level != null) ? this.level.getHeight() : 1;
+		this.frame.setDimension(new Dimension(width, height));
+		this.frame.setDisplayFrame(new Rectangle(0, 0, width, height));
+		this.frame.setSize(width*64, height*64);
+		
 		ISquare square;
 		for (int y = 0; y < this.level.getHeight(); y++) {
 			for (int x = 0; x < this.level.getWidth(); x++) {
@@ -98,5 +100,13 @@ public class Renderer extends Observable implements Runnable{
 				this.frame.addSquare(square, x, y);
 			}
 		}
+		
+		if (this.keyListener != null && this.frame.getKeyListeners()[0] != this.keyListener) {
+			this.frame.addKeyListener(this.keyListener);
+		}
+	}
+	
+	public void setKeyListener(KeyListener keyListener) {
+		this.keyListener = keyListener;
 	}
 }

@@ -18,10 +18,45 @@ public class UserInputHandler implements InputHandler{
 	
 	public UserInputHandler(HashMap<Action, Boolean> inputMap) {
 		this.inputMap = inputMap;
+		for (final Action input : this.inputMap.keySet()) {
+			this.inputMap.put(input, false);
+		}
 	}
 	
 	public Direction getInputDirection() {
-		return null;
+		if (this.isPressed(Action.UP)) {
+			if (this.isPressed(Action.LEFT)) {
+				return Direction.UL;
+			}
+			else if (this.isPressed(Action.RIGHT)) {
+				return Direction.UR;
+			}
+			else {
+				return Direction.U;
+			}
+		}
+		else if (this.isPressed(Action.DOWN)) {
+			if (this.isPressed(Action.LEFT)) {
+				return Direction.DL;
+			}
+			else if (this.isPressed(Action.RIGHT)) {
+				return Direction.DR;
+			}
+			else {
+				return Direction.D;
+			}
+		}
+		else {
+			if (this.isPressed(Action.LEFT)) {
+				return Direction.L;
+			}
+			else if (this.isPressed(Action.RIGHT)) {
+				return Direction.R;
+			}
+			else {
+				return Direction.NONE;
+			}
+		}
 	}
 	
 	/**
@@ -34,7 +69,7 @@ public class UserInputHandler implements InputHandler{
 	 */
 	
 	public boolean isPressed(Action input) {
-		return false;
+		return (this.inputMap.get(input) == true);
 	}
 	
 	/**
@@ -47,7 +82,7 @@ public class UserInputHandler implements InputHandler{
 	 */
 	
 	public boolean isReleased(Action input) {
-		return false;
+		return (this.inputMap.get(input) == false);
 	}
 	
 	
@@ -61,7 +96,7 @@ public class UserInputHandler implements InputHandler{
 	 */
 	
 	public void press(Action input) {
-		
+		this.inputMap.put(input, true);
 	}
 	
 	
@@ -74,7 +109,7 @@ public class UserInputHandler implements InputHandler{
 	 * @return Is the action released?
 	 */
 	public void release(Action input) {
-		
+		this.inputMap.put(input, false);
 	}
 
 }
