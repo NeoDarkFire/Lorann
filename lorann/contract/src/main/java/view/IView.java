@@ -18,12 +18,13 @@ public interface IView {
      * @param message
      *            the message
      */
-    public void addSprite(Entity entity);
-    public void removeSprite(Entity entity);
-    public boolean isPressed(Action input);
-    public boolean isReleased(Action input);
-    public Direction getInputDirection();
-	public void setLevel(ILevel level);
+    void addSprite(Entity entity);
+    void removeSprite(Entity entity);
+    boolean isPressed(Action input);
+    boolean isReleased(Action input);
+    Direction getInputDirection();
+	void setLevel(ILevel level);
 	void refresh();
+	void updateInputs();
     
 }

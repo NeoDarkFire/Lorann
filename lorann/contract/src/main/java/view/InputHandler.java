@@ -9,6 +9,7 @@ public interface InputHandler {
 	public boolean isReleased(Action input);
 	public void press(Action input);
 	public void release(Action input);
+	public void updateInputs();
 	
 
 }

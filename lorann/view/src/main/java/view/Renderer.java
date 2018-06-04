@@ -37,6 +37,7 @@ public class Renderer extends Observable implements Runnable{
 	 */
 	
 	public void setLevel(ILevel level) {
+		this.level = null;
 		this.level = level;
 		if (this.frame == null) {
 			run();

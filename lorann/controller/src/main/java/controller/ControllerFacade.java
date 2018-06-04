@@ -85,6 +85,7 @@ public class ControllerFacade implements IController {
     		currentTime = System.currentTimeMillis();
 	    	dt = (currentTime - lastTime);
 	    	if (dt*fps >= 1000.0) {
+	    		this.view.updateInputs();
 	    		this.lastTime = currentTime;
 	    		engine.update(dt/1000.0);
 	    		if (this.loadNextlevel) {
@@ -135,7 +136,7 @@ public class ControllerFacade implements IController {
 			level = this.model.getLevelByID(1);
 		}
 		// Copy entities to remove into an array
-		Collection<Entity> entities = this.level.getEntities();
+		Collection<Entity> entities = this.engine.getEntitities();
 		Entity[] array = new Entity[entities.size()];
 		entities.toArray(array);
 		

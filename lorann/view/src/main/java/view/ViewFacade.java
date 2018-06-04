@@ -122,5 +122,10 @@ public class ViewFacade implements IView {
     public void refresh() {
     	this.renderer.refresh();
     }
+    
+    @Override
+    public void updateInputs() {
+    	this.handler.updateInputs();
+    }
 
 }

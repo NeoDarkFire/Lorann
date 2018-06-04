@@ -150,6 +150,14 @@ public final class Engine {
 	}
 	
 	/**
+	 * Gets all the entities of the Engine.
+	 * @return A Collection of Entity.
+	 */
+	public Collection<Entity> getEntitities() {
+		return this.entities.values();
+	}
+	
+	/**
 	 * Checks if a System is in the Engine.
 	 * @param sysClass A System class.
 	 * @return True if the System is in the Engine.

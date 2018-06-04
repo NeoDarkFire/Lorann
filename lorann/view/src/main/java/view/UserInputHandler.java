@@ -1,6 +1,7 @@
 package view;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 
 import model.Direction;
 
@@ -14,12 +15,15 @@ import model.Direction;
 public class UserInputHandler implements InputHandler{
 	
 	private HashMap<Action, Boolean> inputMap;
+	private HashMap<Action, LinkedList<Boolean>> llist;
 	
 	
 	public UserInputHandler() {
 		this.inputMap = new HashMap<>();
+		this.llist = new HashMap<>();
 		for (final Action input : Action.values()) {
 			this.inputMap.put(input, false);
+			this.llist.put(input, new LinkedList<>());
 		}
 	}
 	
@@ -89,27 +93,39 @@ public class UserInputHandler implements InputHandler{
 	/**
 	 * If boolean of isPressed is true, execute press
 	 * 
-	 * 
 	 * @param input Action to check.
 	 * 
 	 * @return Is the action pressed?
 	 */
 	
 	public void press(Action input) {
-		this.inputMap.put(input, true);
+		this.llist.get(input).clear();
+		this.llist.get(input).addFirst(true);
 	}
 	
 	
 	/**
 	 * If boolean of isReleased is true, execute released
 	 * 
-	 * 
 	 * @param input Action to check.
 	 * 
 	 * @return Is the action released?
 	 */
 	public void release(Action input) {
-		this.inputMap.put(input, false);
+		this.llist.get(input).addLast(false);
+	}
+	
+	/**
+	 * Update the state of the inputs to use the top of the stack.
+	 */
+	public void updateInputs() {
+		LinkedList<Boolean> llist;
+		for (final Action input : Action.values()) {
+			llist = this.llist.get(input);
+			if (!llist.isEmpty()) {
+				this.inputMap.put(input, llist.pollFirst());
+			}
+		}
 	}
 
 }
