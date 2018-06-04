@@ -1,5 +1,7 @@
 package controller;
 
+import java.awt.Point;
+
 import ecs.Engine;
 import ecs.Entity;
 import model.Direction;
