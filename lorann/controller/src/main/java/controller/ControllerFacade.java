@@ -50,7 +50,7 @@ public class ControllerFacade implements IController {
 		this.model = model;
 		this.engine = new Engine();
 
-    	final ILevel level = this.model.getLevelByID(5);
+    	final ILevel level = this.model.getLevelByID(1);
     	this.view.setLevel(level);
 		this.initLevel( level );
 		
@@ -80,14 +80,14 @@ public class ControllerFacade implements IController {
     public void start() {
     	long currentTime;
     	double dt;
-    	double fps = 5.0;
+    	double fps = 8.0;
     	while (true) {
     		currentTime = System.currentTimeMillis();
-	    	dt = (currentTime - lastTime);
-	    	if (dt*fps >= 1000.0) {
-	    		this.view.updateInputs();
+	    	dt = (currentTime - lastTime)/1000.0;
+	    	if (dt*fps >= 1.0) {
 	    		this.lastTime = currentTime;
-	    		engine.update(dt/1000.0);
+	    		this.view.updateInputs();
+	    		engine.update(dt);
 	    		if (this.loadNextlevel) {
 	    			this.loadNextLevel();
 	    			this.loadNextlevel = false;

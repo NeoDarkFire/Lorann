@@ -24,8 +24,6 @@ public class GateSystem extends CustomSystem {
 
 	@Override
 	public void onEntityRemoved(final Entity e) {
-		e.destroy();
-		
 		ILevel level = this.controller.getCurrentLevel();
 		for (final Entity e2 : level.getEntities()) {
 			if (e2.hasAll(ExitComponent.class, DemonComponent.class)) {
