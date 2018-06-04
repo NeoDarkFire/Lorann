@@ -48,7 +48,7 @@ public abstract class LevelDAO extends AbstractDAO {
                 cells.add(new CellData(		result.getInt(CellData.IDCOL),
                 							result.getInt(CellData.XCOL),
                 							result.getInt(CellData.YCOL),
-                							(char) result.getObject(CellData.SYMBOLCOL),
+                							(char) ((String) result.getObject(CellData.SYMBOLCOL)).charAt(0),
                 							result.getInt(CellData.IDMAPCOL)				));
             }
             result.close();

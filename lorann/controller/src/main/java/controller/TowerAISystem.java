@@ -15,6 +15,14 @@ public class TowerAISystem extends CustomSystem {
 		targets.add(MoveComponent.class);
 		targets.add(PositionComponent.class);
 	}
+	
+	public TowerAISystem(IController controller) {
+		super(controller);
+	}
+	
+	public TowerAISystem() {
+		super();
+	}
 
 	public void update(final Engine engine, final int dt) {
 		MoveComponent move;
@@ -23,8 +31,12 @@ public class TowerAISystem extends CustomSystem {
 		final Entity[] targets = new Entity[1];
 		engine.getEntitiesWithComponent(PlayerComponent.class).toArray(targets); 
 		final Entity target = targets[0];
-		final int target_x = target.get(PositionComponent.class).pos.x;
-		final int target_y = target.get(PositionComponent.class).pos.y;
+		
+		int target_x = 0, target_y = 0;
+		if (target != null) {
+			target_x = target.get(PositionComponent.class).pos.x;
+			target_y = target.get(PositionComponent.class).pos.y;
+		}
 		
 		final ILevel level = this.controller.getCurrentLevel();
 		

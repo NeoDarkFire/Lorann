@@ -8,10 +8,10 @@ import ecs.Entity;
 
 import model.components.PositionComponent;
 
-public class Level {
+public class Level implements ILevel {
 
 	private ITile[][] grid;
-	private ArrayList<Entity> entities;
+	private List<Entity> entities;
 	private LevelData levelData;
 	
 	public Level(LevelData levelData) {
@@ -77,7 +77,7 @@ public class Level {
 		this.entities.remove(entity);
 	}
 	
-	public ArrayList<Entity> getEntities(){
+	public List<Entity> getEntities(){
 		return this.entities;
 	}
 	

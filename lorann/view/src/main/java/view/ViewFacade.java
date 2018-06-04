@@ -32,9 +32,8 @@ public class ViewFacade implements IView {
      * Instantiates a new view facade.
      */
     public ViewFacade() {
-    	final HashMap<Action, Boolean> inputMap = new HashMap<>();
         this.renderer = new Renderer();
-        this.handler = new UserInputHandler(inputMap);
+        this.handler = new UserInputHandler();
         this.renderer.setKeyListener(new MKeyListener(this.handler, keyMap));
         this.sprites = new HashMap<>();
     }
@@ -73,9 +72,9 @@ public class ViewFacade implements IView {
 	 * 
 	 */
     @Override
-    public void displayLevel(ILevel level) {
+    public void setLevel(ILevel level) {
     	this.renderer.setLevel(level);
-    	this.refresh();
+    	this.renderer.refresh();
     }
     
     
@@ -116,6 +115,9 @@ public class ViewFacade implements IView {
     	return (this.handler.getInputDirection());
     }
     
+    /**
+     * Refreshes the screen.
+     */
     @Override
     public void refresh() {
     	this.renderer.refresh();

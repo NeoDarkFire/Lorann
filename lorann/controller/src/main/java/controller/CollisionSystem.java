@@ -12,6 +12,14 @@ public class CollisionSystem extends CustomSystem{
 		targets.add(PositionComponent.class);
 		targets.add(SolidComponent.class);
 	}
+	
+	public CollisionSystem(IController controller) {
+		super(controller);
+	}
+	
+	public CollisionSystem() {
+		super();
+	}
 
 	public void update(Engine engine, int dt) {
 		

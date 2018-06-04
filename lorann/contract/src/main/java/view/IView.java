@@ -20,10 +20,10 @@ public interface IView {
      */
     public void addSprite(Entity entity);
     public void removeSprite(Entity entity);
-    public void displayLevel(ILevel level);
     public boolean isPressed(Action input);
     public boolean isReleased(Action input);
     public Direction getInputDirection();
-    public void refresh();
+	public void setLevel(ILevel level);
+	void refresh();
     
 }

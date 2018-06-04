@@ -15,6 +15,14 @@ public class SpellAISystem extends CustomSystem{
 		targets.add(InputComponent.class);
 	}
 	
+	public SpellAISystem(IController controller) {
+		super(controller);
+	}
+	
+	public SpellAISystem() {
+		super();
+	}
+	
 	private boolean listen;
 	
 	public void onEntitAdded(final Entity e) {
