@@ -7,7 +7,7 @@ import model.Direction;
 /**
  * <h1>The Class UserInputHandler is used to associate the Action (key used) of the user and the direction of the player in the game.</h1>
  *
- * 
+ * @author aurel
  * @version 1.0
  */
 
@@ -22,7 +22,11 @@ public class UserInputHandler implements InputHandler{
 			this.inputMap.put(input, false);
 		}
 	}
-	
+	/**
+	 * Define the different direction when a key is pressed
+	 * Like UP, LEFT, RIGTH,...
+	 * 
+	 */
 	public Direction getInputDirection() {
 		if (this.isPressed(Action.UP)) {
 			if (this.isPressed(Action.LEFT)) {
@@ -63,7 +67,6 @@ public class UserInputHandler implements InputHandler{
 	 * Use a boolean to show if the key is pressed
 	 * 
 	 * @param input Action to check.
-	 * 
 	 * @return Is the action pressed?
 	 * 
 	 */
@@ -76,7 +79,6 @@ public class UserInputHandler implements InputHandler{
 	 * Use a boolean to show if the key is released
 	 * 
 	 * @param input Action to check.
-	 * 
 	 * @return Is the action released?
 	 * 
 	 */
@@ -91,7 +93,6 @@ public class UserInputHandler implements InputHandler{
 	 * 
 	 * 
 	 * @param input Action to check.
-	 * 
 	 * @return Is the action pressed?
 	 */
 	
@@ -105,7 +106,6 @@ public class UserInputHandler implements InputHandler{
 	 * 
 	 * 
 	 * @param input Action to check.
-	 * 
 	 * @return Is the action released?
 	 */
 	public void release(Action input) {

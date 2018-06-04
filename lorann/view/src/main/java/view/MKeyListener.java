@@ -7,9 +7,10 @@ import java.util.HashMap;
 /**
  * <h1>The Class MKeyListener enables to define if a key is pressed or released.</h1>
  *
- * 
+ * @author aurel
  * @version 1.0
  */
+
 
 public class MKeyListener extends KeyAdapter {
 	
@@ -23,7 +24,8 @@ public class MKeyListener extends KeyAdapter {
 
 	/**
 	 * Used when a key is pressed
-	 * 
+	 * Get the ASCII code of the key
+	 * Check if the key is pressed
 	 * @param the keyEvent
 	 * 
 	 */
@@ -35,7 +37,8 @@ public class MKeyListener extends KeyAdapter {
 	
 	/**
 	 * Used when a key is released
-	 * 
+	 * Get the ASCII code of the key
+	 * Check if the key is released
 	 * @param the keyEvent
 	 * 
 	 */

@@ -10,7 +10,7 @@ import model.ILevel;
 /**
  * <h1>The Class ViewFacade provides a facade of the View component.</h1>
  *
- * 
+ * @author aurel
  * @version 1.0
  */
 public class ViewFacade implements IView {
@@ -115,6 +115,9 @@ public class ViewFacade implements IView {
     public Direction getInputDirection() {
     	return (this.handler.getInputDirection());
     }
+    /**
+     * Refresh the renderer
+     */
     
     @Override
     public void refresh() {

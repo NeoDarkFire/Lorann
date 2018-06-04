@@ -14,7 +14,7 @@ import showboard.ISquare;
 /**
  * <h1>The Class Renderer allows to show the display.</h1>
  *
- * 
+ * @author aurel
  * @version 1.0
  */
 
@@ -31,7 +31,7 @@ public class Renderer extends Observable implements Runnable{
 	
 	/**
 	 * Set up the level
-	 * 
+	 * Check if the frame is not null and do an update of the frame
 	 * @param level
 	 * 
 	 */
@@ -44,11 +44,23 @@ public class Renderer extends Observable implements Runnable{
 		
 	}
 	
+	
+	/**
+	 * Set up the frame with the title "Lorann"
+	 * Create a new BoardFrame
+	 * 
+	 */
 	private void setupFrame() {
 		this.frame = new BoardFrame("Lorann");
 		this.updateFrame();
 	}
 	
+	
+	/**
+	 * Run the setupFrame
+	 * Show the frame
+	 * 
+	 */
 	public void run() {
 		this.setupFrame();
 		this.frame.setVisible(true);
@@ -79,12 +91,22 @@ public class Renderer extends Observable implements Runnable{
 		return this.frame;
 		
 	}
+	/**
+	 * Refresh
+	 * Show and notify the different changes
+	 */
 	
 	public void refresh() {
 		this.setChanged();
 		this.notifyObservers();
 	}
 	
+	/**
+	 * Create the frame with different characteristics
+	 * Like the width and the height
+	 * Configure the display of the frame
+	 * Get the coordinates of the Tile of the level
+	 */
 	private void updateFrame() {
 		int width, height;
 		width = (this.level != null) ? this.level.getWidth() : 1;
@@ -105,6 +127,10 @@ public class Renderer extends Observable implements Runnable{
 			this.frame.addKeyListener(this.keyListener);
 		}
 	}
+	/**
+	 * Set the keyListener
+	 * @param keyListener
+	 */
 	
 	public void setKeyListener(KeyListener keyListener) {
 		this.keyListener = keyListener;
