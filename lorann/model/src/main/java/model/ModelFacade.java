@@ -9,7 +9,7 @@ import java.util.List;
 =======
 import model.dao.LevelDAO;
 
->>>>>>> refs/heads/master
+
 /**
  * <h1>The Class ModelFacade provides a facade of the Model component.</h1>
  *
@@ -24,25 +24,9 @@ public final class ModelFacade implements IModel {
     public ModelFacade() {
         super();
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/heads/master
 
 	@Override
-<<<<<<< HEAD
-	public ILevel getLevelByID(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void saveFromFile(File file) {
-		// TODO Auto-generated method stub
-		
-	}
-
-=======
 	public ILevel getLevelByID(int id) throws SQLException {
 		MapData map = LevelDAO.getMapWithID(id);
 		List<CellData> cells = LevelDAO.getCellsByMapID(id);
@@ -55,9 +39,4 @@ public final class ModelFacade implements IModel {
 		LevelDAO.saveFromFile(file, mapID);
 	}
 	
-	@Override
-	public void saveFromFile(File file) throws FileNotFoundException, SQLException {
-		LevelDAO.saveFromFile(file);
-	}
->>>>>>> refs/heads/master
 }
