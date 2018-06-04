@@ -5,8 +5,7 @@ import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.List;
 
-<<<<<<< HEAD
-=======
+
 import model.dao.LevelDAO;
 
 
@@ -37,6 +36,13 @@ public final class ModelFacade implements IModel {
 	@Override
 	public void saveFromFile(File file, int mapID) throws FileNotFoundException, SQLException {
 		LevelDAO.saveFromFile(file, mapID);
+	}
+
+
+	@Override
+	public void saveFromFile(File file) throws FileNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
