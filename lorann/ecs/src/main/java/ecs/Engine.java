@@ -118,14 +118,16 @@ public final class Engine {
 	 */
 	final public Entity removeEntity(final int id) {
 		final Entity e = this.getEntity(id);
-		for (final System sys : this.orderedSystems) {
-			if (sys.hasEntity(e)) {
-				sys.removeEntity(e);
+		if (e != null) {
+			for (final System sys : this.orderedSystems) {
+				if (sys.hasEntity(e)) {
+					sys.removeEntity(e);
+				}
 			}
+			e.unregister();
+			this.unusedIDs.push(e.getID());
+			this.entities.remove(e.getID());
 		}
-		e.unregister();
-		this.unusedIDs.push(e.getID());
-		this.entities.remove(e.getID());
 		return e;
 	}
 	

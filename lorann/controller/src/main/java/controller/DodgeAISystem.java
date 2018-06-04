@@ -53,14 +53,17 @@ public class DodgeAISystem extends CustomSystem{
 			
 			// Reset the movement:
 			move.movement.setDirection(Direction.NONE);
+
 			// Get all the possible movement, sorted by priority:
 			final Movement[] moves = this.getMoveOrder(		target_x - pos.pos.x,
 															target_y - pos.pos.y	);
 			// Try every movements:
 			for (final Movement movement : moves) {
 				// Get potential next position:
-				final int next_x = pos.pos.x + movement.getX();
-				final int next_y = pos.pos.y + movement.getY();
+				final int next_x = pos.pos.x
+						+ movement.getX();
+				final int next_y = pos.pos.y
+						+ movement.getY();
 				// Get stuff potentially already there:
 				final ITile tile = level.getTileAt(next_x, next_y);
 				final Entity e2 = level.getEntityAt(next_x, next_y);
@@ -85,6 +88,9 @@ public class DodgeAISystem extends CustomSystem{
 	protected Movement[] getMoveOrder(final int x, final int y) {
 		Movement[] moves = new Movement[8];
 		moves[0] = new Movement(new Point(x, y));
+		if (moves[0].getDirection() == Direction.NONE) {
+			moves[0].setDirection(Direction.U);
+		}
 		for (int i=1; i < 8; i++) {
 			moves[i] = new Movement(moves[Math.max(0, i-2)].getDirection());
 			if (i%2 == 0) {

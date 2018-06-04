@@ -35,14 +35,15 @@ public class Movement {
 		LIST.add(Direction.L);
 		LIST.add(Direction.UL);
 		
-		ANGLE.put(0.0, 		Direction.R);
-		ANGLE.put(1.0/4.0, 	Direction.UR);
-		ANGLE.put(1.0/2.0, 	Direction.U);
-		ANGLE.put(3.0/4.0, 	Direction.UL);
-		ANGLE.put(1.0, 		Direction.L);
-		ANGLE.put(-3.0/4.0, Direction.DL);
-		ANGLE.put(-1.0/2.0, Direction.D);
-		ANGLE.put(-1.0/4.0, Direction.DR);
+		ANGLE.put(0.0,			Direction.R);
+		ANGLE.put(1.0/4.0,		Direction.UR);
+		ANGLE.put(1.0/2.0,		Direction.U);
+		ANGLE.put(3.0/4.0,		Direction.UL);
+		ANGLE.put(1.0,			Direction.L);
+		ANGLE.put(-1.0,			Direction.L);  // Don't forget -pi. Never.
+		ANGLE.put(-3.0/4.0,		Direction.DL);
+		ANGLE.put(-1.0/2.0,		Direction.D);
+		ANGLE.put(-1.0/4.0,		Direction.DR);
 	}
 	
 	private Direction dir;
@@ -100,12 +101,19 @@ public class Movement {
 	}
 	
 	public void setDirection(Point vec) {
-		double a = Math.atan2(-vec.getY(), vec.getX()) / Math.PI;
-		double d = 1.0/8.0;
-		for (final Double angle : ANGLE.keySet()) {
-			if ( a > (angle-d) && a < (angle+d)) {
-				this.setDirection(ANGLE.get(angle));
-				return;
+		if (vec.x == 0.0 && vec.y == 0.0) {
+			this.setDirection(Direction.NONE);
+		}
+		else {
+			double a = Math.atan2(-vec.getY(), vec.getX()) / Math.PI;
+			double d = 1.0/8.0;
+			Direction dir;
+			for (final double angle : ANGLE.keySet()) {
+				dir = ANGLE.get(angle);
+				if ( a >= (angle-d) && a <= (angle+d) ) {
+					this.setDirection(dir);
+					return;
+				}
 			}
 		}
 	}

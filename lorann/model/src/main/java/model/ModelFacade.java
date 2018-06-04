@@ -26,30 +26,41 @@ public final class ModelFacade implements IModel {
 
 
 	@Override
-	public ILevel getLevelByID(int id) throws SQLException {
-		MapData map = LevelDAO.getMapWithID(id);
-		if (map == null) {
-			return null;
+	public ILevel getLevelByID(int id) {
+		MapData map = null;
+		try {
+			map = LevelDAO.getMapWithID(id);
+			if (map == null) {
+				return null;
+			}
+			List<CellData> cells = LevelDAO.getCellsByMapID(id);
+			if (cells.size() > 0) {
+				LevelData levelData = new LevelData(cells, map);
+				return (ILevel) new Level(levelData);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		List<CellData> cells = LevelDAO.getCellsByMapID(id);
-		if (cells.size() > 0) {
-			LevelData levelData = new LevelData(cells, map);
-			return (ILevel) new Level(levelData);
-		}
-		else {
-			return null;
-		}
+		return null;
 	}
 	
 	@Override
-	public void saveFromFile(File file, int mapID) throws FileNotFoundException, SQLException {
-		LevelDAO.saveFromFile(file, mapID);
+	public void saveFromFile(File file, int mapID) {
+		try {
+			LevelDAO.saveFromFile(file, mapID);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 
 	@Override
-	public void saveFromFile(File file) throws FileNotFoundException, SQLException {
-		LevelDAO.saveFromFile(file);
+	public void saveFromFile(File file) {
+		try {
+			LevelDAO.saveFromFile(file);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override

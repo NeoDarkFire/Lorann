@@ -1,6 +1,7 @@
  package controller;
 
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.List;
 
 import ecs.Engine;
@@ -32,6 +33,9 @@ public class ControllerFacade implements IController {
     
     /** The time of the last update. */
     private long lastTime;
+    
+    /** Flag to load the next level */
+    private boolean loadNextlevel;
 
     /**
      * Instantiates a new controller facade.
@@ -45,27 +49,25 @@ public class ControllerFacade implements IController {
     	this.view = view;
 		this.model = model;
 		this.engine = new Engine();
-    	try {
-        	final ILevel level = this.model.getLevelByID(1);
-        	this.view.setLevel(level);
-			this.initLevel( level );
-			
-			this.engine.addSystem(new LevelUpdaterSystem(this));
-			
-			this.engine.addSystem(new UserInputSystem(this));
-			this.engine.addSystem(new SpellAISystem(this));
-			this.engine.addSystem(new FollowAISystem(this));
-			this.engine.addSystem(new TowerAISystem(this));
-			this.engine.addSystem(new DodgeAISystem(this));
-			this.engine.addSystem(new BishopAISystem(this));
-			this.engine.addSystem(new CollisionSystem(this));
-			this.engine.addSystem(new MovementSystem(this));
-			this.engine.addSystem(new AnimationSystem(this));
-			
-			this.engine.addSystem(new GateSystem(this));
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
+
+    	final ILevel level = this.model.getLevelByID(5);
+    	this.view.setLevel(level);
+		this.initLevel( level );
+		
+		this.engine.addSystem(new LevelUpdaterSystem(this));
+		
+		this.engine.addSystem(new UserInputSystem(this));
+		this.engine.addSystem(new SpellAISystem(this));
+		this.engine.addSystem(new FollowAISystem(this));
+		this.engine.addSystem(new TowerAISystem(this));
+		this.engine.addSystem(new DodgeAISystem(this));
+		this.engine.addSystem(new BishopAISystem(this));
+		this.engine.addSystem(new CollisionSystem(this));
+		this.engine.addSystem(new MovementSystem(this));
+		this.engine.addSystem(new AnimationSystem(this));
+		
+		this.engine.addSystem(new GateSystem(this));
+		this.engine.addSystem(new ExitSystem(this));
     }
 
     /**
@@ -78,12 +80,17 @@ public class ControllerFacade implements IController {
     public void start() {
     	long currentTime;
     	double dt;
+    	double fps = 5.0;
     	while (true) {
     		currentTime = System.currentTimeMillis();
-	    	dt = (currentTime - lastTime)/1000.0;
-	    	if (dt >= 1/6.0) {
+	    	dt = (currentTime - lastTime);
+	    	if (dt*fps >= 1000.0) {
 	    		this.lastTime = currentTime;
-	    		engine.update(dt);
+	    		engine.update(dt/1000.0);
+	    		if (this.loadNextlevel) {
+	    			this.loadNextLevel();
+	    			this.loadNextlevel = false;
+	    		}
 	    		this.view.refresh();
 	    	}
     	}
@@ -116,25 +123,37 @@ public class ControllerFacade implements IController {
     
     @Override
     public void nextLevel() {
-    	int id = this.level.getID() + 1;
-    	final ILevel level;
+    	this.loadNextlevel = true;
+    }
+    
+    private void loadNextLevel() {
+    	final int id = this.level.getID() + 1;
+    	ILevel level;
     	
-    	try {
-    		level = this.model.getLevelByID(id);
-			if (level != null) {
-				for (final Entity e : this.level.getEntities()) {
-					e.destroy();
-				}
-				this.initLevel(level);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		level = this.model.getLevelByID(id);
+		if (level == null) {
+			level = this.model.getLevelByID(1);
 		}
+		// Copy entities to remove into an array
+		Collection<Entity> entities = this.level.getEntities();
+		Entity[] array = new Entity[entities.size()];
+		entities.toArray(array);
+		
+		for (final Entity e : array) {
+			engine.removeEntity(e.getID());
+		}
+		this.initLevel(level);
     }
     
     public void initLevel(ILevel level) {
 		this.level = level;
-		for (final Entity e : this.level.getEntities()) {
+		this.view.setLevel(level);
+		// Copy entities to add into an array
+		Collection<Entity> entities = this.level.getEntities();
+		Entity[] array = new Entity[entities.size()];
+		entities.toArray(array);
+		
+		for (final Entity e : array) {
 			engine.addEntity(e);
 		}
     }

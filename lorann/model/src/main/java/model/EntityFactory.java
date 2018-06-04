@@ -224,9 +224,12 @@ public abstract class EntityFactory {
 		
 		ExitComponent exit = new ExitComponent();
 		
+		solid.type = CollisionType.STOP;
+		
 		e.attach(pos);
 		e.attach(drawable);
 		e.attach(exit);
+		e.attach(solid);
 		
 		return e;
 	}
@@ -248,10 +251,15 @@ public abstract class EntityFactory {
 		
 		EnergyBallComponent energyBall = new EnergyBallComponent();
 		
+		SolidComponent solid = new SolidComponent();
+		solid.type = CollisionType.STOP;
+		
 		e.attach(pos);
 		e.attach(drawable);
 		e.attach(collectible);
 		e.attach(energyBall);
+		e.attach(solid);
+		
 		
 		return e;
 	}
@@ -272,9 +280,13 @@ public abstract class EntityFactory {
 		CollectibleComponent collectible = new CollectibleComponent();
 		collectible.score = 100;
 		
+		SolidComponent solid = new SolidComponent();
+		solid.type = CollisionType.STOP;
+		
 		e.attach(pos);
 		e.attach(drawable);
 		e.attach(collectible);
+		e.attach(solid);
 		
 		return e;
 	}

@@ -64,6 +64,18 @@ public class CollisionSystem extends CustomSystem{
 			return;
 		}
 		
+		// Exiting the level:
+		if (e.has(PlayerComponent.class) && e2 != null && e2.has(ExitComponent.class) && !e2.has(DemonComponent.class)) {
+			e2.destroy();
+		}
+		
+		// The movement allows a collection:
+		// TODO: add a CollecterComponent
+		if (e.has(PlayerComponent.class) && e2 != null && e2.has(CollectibleComponent.class)) {
+			// TODO: handle score
+			e2.destroy();
+		}
+		
 		// Check if this tile is occupied:
 		if (tile.getSolidity() != TileSolidity.FREE
 		|| (e2 != null && e2.has(SolidComponent.class))) {
@@ -81,11 +93,6 @@ public class CollisionSystem extends CustomSystem{
 							}
 							return;
 			}
-		}
-		// The movement allows a collection:
-		else if (e2 != null && e2.has(CollectibleComponent.class)) {
-			// TODO: handle score
-			e2.destroy();
 		}
 		// The movement allows a kill:
 		else if (e2 != null && e2.has(KillableComponent.class)
