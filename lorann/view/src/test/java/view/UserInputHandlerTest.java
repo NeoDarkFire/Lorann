@@ -10,6 +10,11 @@ import org.junit.Test;
 
 import model.Direction;
 
+/**
+ * <h1>These are different tests for the view</h1>
+ * @author aurel
+ *
+ */
 public class UserInputHandlerTest {
 
 	private UserInputHandler handler;
@@ -24,7 +29,10 @@ public class UserInputHandlerTest {
 	public void tearDown() {
 		this.handler = null;
 	}
-	
+	/**
+	 * This test, test the keyboard keys according to the direction
+	 * "assertEquals" enables to check the equality between two items
+	 */
 	@Test
 	public void testGetInputDirection() {
 		this.handler.press(Action.UP);
@@ -32,12 +40,22 @@ public class UserInputHandlerTest {
 		assertEquals(this.handler.getInputDirection(), Direction.UL);
 	}
 	
+	/**
+	 * This test, check if a keyboard key is pressed
+	 * "assertEquals" enables to check the equality between two items
+	 * 
+	 */
 	@Test
 	public void testIsPressed() {
 		this.handler.press(Action.UP);
 		assertEquals(this.handler.isPressed(Action.UP), true);
 	}
 	
+	/**
+	 * This test, check if a keyboard key is released
+	 *"assertEquals" enables to check the equality between two items
+	 *
+	 */
 	@Test
 	public void testIsReleased() {
 		this.handler.press(Action.UP);
