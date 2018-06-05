@@ -5,8 +5,6 @@ import java.awt.Rectangle;
 import java.awt.event.KeyListener;
 import java.util.Observable;
 
-import javax.swing.SwingUtilities;
-
 import model.ILevel;
 import showboard.BoardFrame;
 import showboard.ISquare;
@@ -18,7 +16,7 @@ import showboard.ISquare;
  * @version 1.0
  */
 
-public class Renderer extends Observable implements Runnable{
+public class Renderer extends Observable implements Runnable {
 	
 	private ILevel level;
 	private BoardFrame frame;
@@ -26,7 +24,7 @@ public class Renderer extends Observable implements Runnable{
 	
 	
 	public Renderer() {
-//		SwingUtilities.invokeLater(this);
+		super();
 	}
 	
 	/**
