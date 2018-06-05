@@ -1,7 +1,5 @@
 package controller;
 
-import java.util.List;
-
 import ecs.Engine;
 import ecs.Entity;
 import model.CollisionType;
@@ -63,7 +61,7 @@ public class CollisionSystem extends CustomSystem{
 		
 			// Colliding with entities
 			final Entity e2 = this.getEntityFor(e);
-			if ( !engine.hasEntity(e) ) 	return;
+			if ( !engine.hasEntity(e) ) return;
 			if ( !engine.hasEntity(e2) || e == e2);
 			else if ( this.collectSpell(e, e2) );
 			else if ( this.exitLevel(e, e2) );
