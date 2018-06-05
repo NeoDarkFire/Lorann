@@ -10,6 +10,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * <h1>Tests the LevelData</h1>
+ *
+ */
 public class LevelDataTest {
 
 	@Before
@@ -20,6 +24,10 @@ public class LevelDataTest {
 	public void tearDown() throws Exception {
 	}
 
+	/**
+	 * tests if the method manage to load the level from the file
+	 * @throws FileNotFoundException
+	 */
 	@Test
 	public void testLevelDataFromFile() throws FileNotFoundException {
 		ClassLoader classLoader = getClass().getClassLoader();
