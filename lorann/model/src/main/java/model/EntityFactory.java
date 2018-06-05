@@ -88,12 +88,7 @@ public abstract class EntityFactory {
 		pos.pos = new Point();
 		
 		MoveComponent move = new MoveComponent();
-		switch (type) {
-		case 1: move.movement = new RestrictedMovement(Direction.NONE); break;
-		case 2: move.movement = new Movement(Direction.NONE); break;
-		case 3: move.movement = new Movement(Direction.NONE); break;
-		case 4: move.movement = new RestrictedMovement(Direction.NONE); break;
-		}
+		move.movement = new Movement(Direction.NONE);
 		
 		DemonComponent demon = new DemonComponent();
 		
