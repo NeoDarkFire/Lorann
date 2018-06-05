@@ -1,8 +1,6 @@
 package model;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.sql.SQLException;
 import java.util.List;
 
 import ecs.Entity;
@@ -71,6 +69,36 @@ public final class ModelFacade implements IModel {
 	@Override
 	public Entity createDoor() {
 		return EntityFactory.createDoor();
+	}
+
+
+	@Override
+	public Entity createLorann() {
+		return EntityFactory.createLorann();
+	}
+
+
+	@Override
+	public Entity createDemon(int type) {
+		return EntityFactory.createDemon(type);
+	}
+
+
+	@Override
+	public Entity createMask() {
+		return EntityFactory.createMask();
+	}
+
+
+	@Override
+	public Entity createEnergyBall() {
+		return EntityFactory.createEnergyBall();
+	}
+
+
+	@Override
+	public Entity createPurse() {
+		return EntityFactory.createPurse();
 	}
 	
 }

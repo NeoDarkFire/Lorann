@@ -6,8 +6,7 @@ import showboard.ISquare;
 
 public interface ITile extends ISquare {
 	
-	public Image getImage();
-	public TileSolidity getSolidity();
-	
+	Image getImage();
+	TileSolidity getSolidity();
 
 }

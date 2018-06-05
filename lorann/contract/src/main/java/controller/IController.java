@@ -12,9 +12,10 @@ import view.IView;
  */
 public interface IController {
 	
-	public void start();
-	public IView getView();
-	public IModel getModel();
+	void start();
+	IView getView();
+	IModel getModel();
 	ILevel getCurrentLevel();
 	void nextLevel();
+
 }

@@ -1,8 +1,6 @@
 package model;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.sql.SQLException;
 
 import ecs.Entity;
 
@@ -13,10 +11,15 @@ import ecs.Entity;
  * @version 1.0
  */
 public interface IModel {
-    public ILevel getLevelByID(int id);
-    public void saveFromFile(File file, int mapID);
-    public void saveFromFile(File file);
-	public Entity createSpell();
-	public Entity createDoor();
+    ILevel getLevelByID(int id);
+    void saveFromFile(File file, int mapID);
+    void saveFromFile(File file);
+    Entity createLorann();
+    Entity createDemon(int type);
+    Entity createSpell();
+    Entity createMask();
+	Entity createDoor();
+	Entity createEnergyBall();
+	Entity createPurse();
 
 }
