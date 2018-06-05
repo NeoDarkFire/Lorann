@@ -18,6 +18,7 @@ public class LevelUpdaterSystem extends CustomSystem{
 		super();
 	}
 	
+	@Override
 	public void onEntityAdded(final Entity e) {
 		final ILevel level = this.controller.getCurrentLevel();
 		final IView view = this.controller.getView();

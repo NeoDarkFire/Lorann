@@ -63,7 +63,6 @@ public class ControllerFacade implements IController {
 		this.engine.addSystem(new DodgeAISystem(this));
 		this.engine.addSystem(new BishopAISystem(this));
 		this.engine.addSystem(new CollisionSystem(this));
-//		this.engine.addSystem(new MovementSystem(this));
 		this.engine.addSystem(new AnimationSystem(this));
 		
 		this.engine.addSystem(new GateSystem(this));
