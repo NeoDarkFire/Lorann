@@ -1,22 +1,17 @@
 package controller;
 
 import java.awt.Point;
-
-import ecs.Engine;
-import ecs.Entity;
 import model.Direction;
-import model.ILevel;
-import model.ITile;
 import model.Movement;
-import model.TileSolidity;
 import model.components.*;
 
-public class DodgeAISystem extends CustomSystem{
+public class DodgeAISystem extends EnnemyAISystem {
 
 	{
 		targets.add(DodgeAIComponent.class);
 		targets.add(MoveComponent.class);
 		targets.add(PositionComponent.class);
+		aggressive = false;
 	}
 	
 	public DodgeAISystem(IController controller) {
@@ -26,63 +21,7 @@ public class DodgeAISystem extends CustomSystem{
 	public DodgeAISystem() {
 		super();
 	}
-
-	// TODO: parameterise an abstract system to avoid copy-pasted code.
 	
-	// TODO: /!\ WARNING: update is almost the same as TowerAISystem /!\
-	@Override
-	public void update(final Engine engine, final double dt) {
-		MoveComponent move;
-		PositionComponent pos;
-		
-		final Entity[] targets = new Entity[1];
-		engine.getEntitiesWithComponent(PlayerComponent.class).toArray(targets); 
-		final Entity target = targets[0];
-		
-		final ILevel level = this.controller.getCurrentLevel();
-		
-		for (final Entity e : this) {
-			move = e.get(MoveComponent.class);
-			pos = e.get(PositionComponent.class);
-			
-			// Reset the movement:
-			move.movement.setDirection(Direction.NONE);
-			
-			// Get the target position:
-			int target_x = 0, target_y = 0;
-			if (target != null) {
-				target_x = target.get(PositionComponent.class).pos.x - pos.pos.x;
-				target_y = target.get(PositionComponent.class).pos.y - pos.pos.y;
-			}
-
-			// Get all the possible movement, sorted by priority:
-			final Movement[] moves = this.getMoveOrder(target_x, target_y);
-			
-			// Try every movements:
-			for (final Movement movement : moves) {
-				// Get potential next position:
-				final int next_x = pos.pos.x + movement.getX();
-				final int next_y = pos.pos.y + movement.getY();
-				
-				// Get stuff potentially already there:
-				final ITile tile = level.getTileAt(next_x, next_y);
-				final Entity e2 = level.getEntityAt(next_x, next_y);
-				
-				// Check if this tile is occupied:
-				if (tile.getSolidity() != TileSolidity.FREE
-				|| (e2 != null && e2.hasOne(SolidComponent.class, CollectibleComponent.class))) {
-					continue;
-				}
-				// The tile is free:
-				else {
-					move.movement = movement;
-					break;
-				}
-			}
-		}
-	}
-	
-	// TODO: WARNING /!\ Same as FollowAISystem /!\
 	protected Movement[] getMoveOrder(final int x, final int y) {
 		Movement[] moves = new Movement[8];
 		moves[0] = new Movement(new Point(x, y));
@@ -92,10 +31,10 @@ public class DodgeAISystem extends CustomSystem{
 		for (int i=1; i < 8; i++) {
 			moves[i] = new Movement(moves[Math.max(0, i-2)].getDirection());
 			if (i%2 == 0) {
-				moves[i].rotateRight();
+				moves[i].rotateLeft();
 			}
 			else {
-				moves[i].rotateLeft();
+				moves[i].rotateRight();
 			}
 		}
 		return moves;

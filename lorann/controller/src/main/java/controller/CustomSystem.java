@@ -16,4 +16,5 @@ public abstract class CustomSystem extends ecs.System {
 	public void setController(IController controller) {
 		this.controller = controller;
 	}
+
 }
