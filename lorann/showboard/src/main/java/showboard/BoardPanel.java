@@ -8,6 +8,7 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -102,10 +103,10 @@ class BoardPanel extends JPanel implements Observer {
      * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
      */
     @Override
-    public final void paintComponent(final Graphics graphics) {
+    synchronized public final void paintComponent(final Graphics graphics) {
 
         final Map<String, ArrayList<IPawn>> mapPawn = this.createMapPawn();
-
+     
         for (int x = this.getCornerMinX(); x <= this.getCornerMaxX(); x++) {
             for (int y = this.getCornerMinY(); y <= this.getCornerMaxY(); y++) {
                 this.drawSquareXY(graphics, x, y);
@@ -119,7 +120,7 @@ class BoardPanel extends JPanel implements Observer {
      * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
      */
     @Override
-    public final void update(final Observable observable, final Object object) {
+    synchronized public final void update(final Observable observable, final Object object) {
         this.repaint();
     }
 
@@ -307,7 +308,7 @@ class BoardPanel extends JPanel implements Observer {
      *
      * @return the map
      */
-    private Map<String, ArrayList<IPawn>> createMapPawn() {
+    synchronized private Map<String, ArrayList<IPawn>> createMapPawn() {
         final Map<String, ArrayList<IPawn>> mapPawn = new HashMap<>();
         String key;
 
@@ -346,7 +347,7 @@ class BoardPanel extends JPanel implements Observer {
      * @param y
      *            the y
      */
-    private void drawSquareXY(final Graphics graphics, final int x, final int y) {
+    synchronized private void drawSquareXY(final Graphics graphics, final int x, final int y) {
         Image image;
         image = this.getImageXY(x, y, this.getWidthLimit(), this.getHeightLimit());
         graphics.drawImage(image, this.getSquareSizeWidth() * (x - this.getCornerMinX()),
@@ -367,8 +368,7 @@ class BoardPanel extends JPanel implements Observer {
      * @param y
      *            the y
      */
-    private void drawPawnsXY(final Graphics graphics, final Map<String, ArrayList<IPawn>> mapPawn, final int x,
-            final int y) {
+    private void drawPawnsXY(final Graphics graphics, final Map<String, ArrayList<IPawn>> mapPawn, final int x, final int y) {
         final List<IPawn> listPawn = mapPawn.get(this.createMapPawnKey(this.calculateRealX(x), this.calculateRealY(y)));
         if (listPawn != null) {
             for (final IPawn pawn : listPawn) {

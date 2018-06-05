@@ -83,7 +83,7 @@ public class BoardFrame extends JFrame implements IBoard {
     public BoardFrame(final Boolean decorated) {
         this("", decorated);
     }
-
+    
     /*
      * (non-Javadoc)
      * @see fr.exia.showboard.IBoard#addSquare(fr.exia.showboard.ISquare, int, int)

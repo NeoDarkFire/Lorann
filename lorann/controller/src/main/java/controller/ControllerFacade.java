@@ -49,6 +49,8 @@ public class ControllerFacade implements IController {
     	this.view = view;
 		this.model = model;
 		this.engine = new Engine();
+		
+		engine._debug = true;
 
     	final ILevel level = this.model.getLevelByID(1);
     	this.view.setLevel(level);
@@ -72,6 +74,7 @@ public class ControllerFacade implements IController {
 
     /**
      * Start.
+     * @throws InterruptedException 
      *
      * @throws SQLException
      *             the SQL exception
@@ -81,18 +84,30 @@ public class ControllerFacade implements IController {
     	long currentTime;
     	double dt;
     	double fps = 8.0;
+    	lastTime = -1;
+    	
     	while (true) {
     		currentTime = System.currentTimeMillis();
 	    	dt = (currentTime - lastTime)/1000.0;
+	    	
 	    	if (dt*fps >= 1.0) {
-	    		this.lastTime = currentTime;
+	    		lastTime = currentTime;
+	    		
 	    		this.view.updateInputs();
 	    		engine.update(dt);
+	    		
 	    		if (this.loadNextlevel) {
 	    			this.loadNextLevel();
 	    			this.loadNextlevel = false;
 	    		}
+	    		
 	    		this.view.refresh();
+	    	}
+	    	// Sleep a bit, to not over-use the CPU.
+	    	try {
+	    		Thread.sleep(1);
+	    	} catch (Exception ex) {
+	    		ex.printStackTrace();
 	    	}
     	}
     }
@@ -147,6 +162,8 @@ public class ControllerFacade implements IController {
     }
     
     public void initLevel(ILevel level) {
+    	java.lang.System.out.println("[Controller] Loading level #" + level.getID() + "...");
+    	
 		this.level = level;
 		this.view.setLevel(level);
 		// Copy entities to add into an array

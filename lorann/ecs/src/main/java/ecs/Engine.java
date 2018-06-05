@@ -22,6 +22,8 @@ import java.util.Stack;
  */
 public final class Engine {
 
+	public boolean _debug = false;
+	
 	private Map<Integer, Entity> entities;
 	private Map<Class<? extends System>, System> systems;
 	private List<System> orderedSystems;
@@ -106,7 +108,7 @@ public final class Engine {
 		e.setID(id);
 		this.entities.put(id, e);
 		e.register(this);
-		java.lang.System.out.println("[Engine] Adding entity: " + e + " -> "+ e.allComponents());
+		if (_debug) java.lang.System.out.println("[Engine] Adding entity: " + e + " -> "+ e.allComponents());
 		for (final System sys : this.orderedSystems) {
 			sys.addEntity(e);
 		}
@@ -120,7 +122,7 @@ public final class Engine {
 	final public Entity removeEntity(final int id) {
 		final Entity e = this.getEntity(id);
 		if (e != null) {
-			java.lang.System.out.println("[Engine] Removing entity: " + e + " -> "+ e.allComponents());
+			if (_debug) java.lang.System.out.println("[Engine] Removing entity: " + e + " -> "+ e.allComponents());
 			e.unregister();
 			for (final System sys : this.orderedSystems) {
 				if (sys.hasEntity(e)) {

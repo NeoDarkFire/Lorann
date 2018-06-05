@@ -74,7 +74,6 @@ public class ViewFacade implements IView {
     @Override
     public void setLevel(ILevel level) {
     	this.renderer.setLevel(level);
-    	this.renderer.refresh();
     }
     
     

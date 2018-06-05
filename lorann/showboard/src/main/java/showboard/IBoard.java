@@ -16,7 +16,7 @@ import java.util.Observer;
  */
 public interface IBoard {
 
-    /**
+	/**
      * Adds the square.
      *
      * @param square
@@ -75,4 +75,5 @@ public interface IBoard {
      *            the new display frame
      */
     void setDisplayFrame(Rectangle displayFrame);
+
 }

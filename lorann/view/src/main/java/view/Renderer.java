@@ -37,7 +37,6 @@ public class Renderer extends Observable implements Runnable{
 	 */
 	
 	public void setLevel(ILevel level) {
-		this.level = null;
 		this.level = level;
 		if (this.frame == null) {
 			run();
@@ -84,8 +83,10 @@ public class Renderer extends Observable implements Runnable{
 	}
 	
 	public void refresh() {
-		this.setChanged();
-		this.notifyObservers();
+		synchronized (this.frame) {
+			this.setChanged();
+			this.notifyObservers();
+		}
 	}
 	
 	private void updateFrame() {
@@ -97,10 +98,12 @@ public class Renderer extends Observable implements Runnable{
 		this.frame.setSize(width*64, height*64);
 		
 		ISquare square;
-		for (int y = 0; y < height; y++) {
-			for (int x = 0; x < width; x++) {
-				square = this.level.getTileAt(x, y);
-				this.frame.addSquare(square, x, y);
+		synchronized (this.frame) {
+			for (int y = 0; y < height; y++) {
+				for (int x = 0; x < width; x++) {
+					square = this.level.getTileAt(x, y);
+					this.frame.addSquare(square, x, y);
+				}
 			}
 		}
 		
