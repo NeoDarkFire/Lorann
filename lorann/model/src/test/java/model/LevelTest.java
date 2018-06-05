@@ -44,7 +44,7 @@ public class LevelTest {
 		pos.pos = new Point(0, 0);
 		this.level.addEntity(new Entity(pos));
 		this.level.reload();
-		Entity e = this.level.getEntityAt(0, 0);
+		Entity e = this.level.getEntitiesAt(0, 0).get(0);
 		if (e != null) {
 			fail("Did not properly reload a level.");
 		}
@@ -60,7 +60,7 @@ public class LevelTest {
 	@Test
 	public void testRemoveEntity() {
 		final int n = this.level.getEntities().size();
-		this.level.removeEntity(this.level.getEntityAt(1, 10));
+		this.level.removeEntity(this.level.getEntitiesAt(1, 10).get(0));
 		assertEquals(n-1, this.level.getEntities().size());
 	}
 
@@ -71,11 +71,11 @@ public class LevelTest {
 	}
 
 	@Test
-	public void testGetEntityAt() {
+	public void testGetEntitiesAt() {
 		PositionComponent pos = new PositionComponent();
 		pos.pos = new Point(0, 0);
 		this.level.addEntity(new Entity(pos));
-		Entity e = this.level.getEntityAt(0, 0);
+		Entity e = this.level.getEntitiesAt(0, 0).get(0);
 		if (e == null) {
 			fail("Failed to get an Entity.");
 		}

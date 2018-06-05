@@ -66,19 +66,19 @@ public class DodgeAISystem extends CustomSystem{
 						+ movement.getY();
 				// Get stuff potentially already there:
 				final ITile tile = level.getTileAt(next_x, next_y);
-				final Entity e2 = level.getEntityAt(next_x, next_y);
-				
-				// Check if this tile is occupied:
-				// (note:	The AI will ALWAYS dodge the spell, unless no move is possible.
-				// 			However, the AI will also NEVER kill the player by itself.		)
-				if (tile.getSolidity() != TileSolidity.FREE
-				|| (e2 != null && e2.hasOne(SolidComponent.class, CollectibleComponent.class, SpellComponent.class))) {
-					continue;
-				}
-				// The tile is free:
-				else {
-					move.movement = movement;
-					break;
+				for (final Entity e2 : level.getEntitiesAt(next_x, next_y)) {
+					// Check if this tile is occupied:
+					// (note:	The AI will ALWAYS dodge the spell, unless no move is possible.
+					// 			However, the AI will also NEVER kill the player by itself.		)
+					if (tile.getSolidity() != TileSolidity.FREE
+					|| (e2 != null && e2.hasOne(SolidComponent.class, CollectibleComponent.class, SpellComponent.class))) {
+						continue;
+					}
+					// The tile is free:
+					else {
+						move.movement = movement;
+						break;
+					}
 				}
 			}
 		}

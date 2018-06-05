@@ -81,15 +81,17 @@ public class Level implements ILevel {
 		return this.entities;
 	}
 	
-	public Entity getEntityAt(int x , int y) {
+	@Override
+	public List<Entity> getEntitiesAt(int x , int y) {
 		PositionComponent pos;
+		List<Entity> entities = new ArrayList<Entity>();
 		for (final Entity e : this.entities) {
 			pos = e.get(PositionComponent.class);
 			if (pos != null && pos.pos.getX() == x && pos.pos.getY() == y) {
-				return e;
+				entities.add(e);
 			}
 		}
-		return null;
+		return entities;
 	}
 	
 	public int getID() {

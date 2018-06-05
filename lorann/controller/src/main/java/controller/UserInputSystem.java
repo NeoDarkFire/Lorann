@@ -45,7 +45,7 @@ public class UserInputSystem extends CustomSystem {
 			}
 			
 			final int nOfSpell = engine.getEntitiesWithComponent(SpellComponent.class).size();
-			if (view.isPressed(Action.SPELL) && nOfSpell >= 0 && spellCaster.spellMovement.getDirection() != Direction.NONE) {
+			if (view.isPressed(Action.SPELL) && nOfSpell < 1 && spellCaster.spellMovement.getDirection() != Direction.NONE) {
 				final Entity spell = this.controller.getModel().createSpell();
 				final PositionComponent spellPos = spell.get(PositionComponent.class);
 				final MoveComponent spellMove = spell.get(MoveComponent.class);

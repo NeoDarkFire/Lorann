@@ -12,6 +12,7 @@ public class SpellAISystem extends CustomSystem{
 	{
 		targets.add(SpellAIComponent.class);
 		targets.add(MoveComponent.class);
+		targets.add(PositionComponent.class);
 		targets.add(InputComponent.class);
 	}
 	
@@ -33,6 +34,7 @@ public class SpellAISystem extends CustomSystem{
 	@Override
 	public void update(final Engine engine, final double dt) {
 		final IView view = this.controller.getView();
+		
 		if (this.listen && view.isPressed(Action.SPELL)) {
 			this.listen = false;
 			
@@ -41,15 +43,17 @@ public class SpellAISystem extends CustomSystem{
 			final Entity target = targets[0];
 			
 			if (target != null) {
-				final Point targetPos = targets[0].get(PositionComponent.class).pos; 
+				final PositionComponent targetPos = targets[0].get(PositionComponent.class);
 				for (final Entity e : this) {
-					// TODO: FIX
-//					e.get(MoveComponent.class).movement.setDirection(targetPos);
+					final PositionComponent pos = e.get(PositionComponent.class);
+					final Point dest = new Point(	targetPos.pos.x - pos.pos.x,
+													targetPos.pos.y - pos.pos.y		);
+					e.get(MoveComponent.class).movement.setDirection(dest);
 					java.lang.System.out.println(e.get(MoveComponent.class).movement.getDirection());
 				}
 			}
 		}
-		else {
+		else if (view.isReleased(Action.SPELL)) {
 			this.listen = true;
 		}
 	}

@@ -13,7 +13,7 @@ public interface ILevel {
 	public void addEntity(Entity entity);
 	public void removeEntity(Entity entity);
 	public List<Entity> getEntities();
-	public Entity getEntityAt(int x, int y);
 	public int getID();
+	public List<Entity> getEntitiesAt(int x, int y);
 
 }
