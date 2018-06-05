@@ -1,5 +1,9 @@
 package model;
 
+/**
+ * <h1>Used to fetch the data about the Map from the database </h1>
+ *
+ */
 public class MapData {
 	
 //----------------------ATTRIBUTES--------------------
@@ -11,6 +15,12 @@ public class MapData {
 	public final static int HEIGHTCOL= 3 ;
 	
 //----------------------METHODS---------------------	
+	/**
+	 * constructor
+	 * @param id
+	 * @param width
+	 * @param height
+	 */
 	public MapData(int id, int width, int height) {
 		this.setID(id);
 		this.setWidth(width);

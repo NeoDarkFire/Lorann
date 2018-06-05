@@ -23,7 +23,7 @@ public abstract class Main {
         
         try {
             controller.start();
-        } catch (final Exception exception) {
+        } catch (final Exception exception) { 
             exception.printStackTrace();
         }
     	
