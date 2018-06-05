@@ -5,7 +5,6 @@ import java.awt.Rectangle;
 import java.awt.event.KeyListener;
 import java.util.Observable;
 
-import javax.swing.SwingUtilities;
 
 import model.ILevel;
 import showboard.BoardFrame;
