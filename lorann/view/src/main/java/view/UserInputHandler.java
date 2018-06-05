@@ -8,13 +8,21 @@ import model.Direction;
 /**
  * <h1>The Class UserInputHandler is used to associate the Action (key used) of the user and the direction of the player in the game.</h1>
  *
- * 
+ * @author aurel
  * @version 1.0
  */
 
 public class UserInputHandler implements InputHandler{
 	
+	/**
+	 * Composition because we use the HashMap in this class
+	 * HashMap of type action and boolean
+	 */
 	private HashMap<Action, Boolean> inputMap;
+	/**
+	 * Composition because we use the HashMap in this class
+	 * HashMap of type action and boolean
+	 */
 	private HashMap<Action, LinkedList<Boolean>> llist;
 	
 	
@@ -27,6 +35,11 @@ public class UserInputHandler implements InputHandler{
 		}
 	}
 	
+	/**
+	 * 
+	 * Return the direction of the different keys pressed
+	 * 
+	 */
 	public Direction getInputDirection() {
 		if (this.isPressed(Action.UP)) {
 			if (this.isPressed(Action.LEFT)) {

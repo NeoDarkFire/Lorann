@@ -10,13 +10,23 @@ import model.ILevel;
 /**
  * <h1>The Class ViewFacade provides a facade of the View component.</h1>
  *
- * 
+ * @author aurel
  * @version 1.0
  */
 public class ViewFacade implements IView {
 	
+	/**
+	 * Composition because we use the Renderer in this class
+	 */
 	private Renderer renderer;
+	/**
+	 * Composition because we use the HashMap in this class
+	 * HashMap of type entity and sprite
+	 */
 	private HashMap<Entity, Sprite> sprites;
+	/**
+	 * Composition because we use the InputHandler in this class
+	 */
 	private InputHandler handler;
 	
 	static private HashMap<Integer, Action> keyMap = new HashMap<>();
@@ -122,6 +132,9 @@ public class ViewFacade implements IView {
     	this.renderer.refresh();
     }
     
+    /**
+     * If multiple events have been registered, use the first one and pop it from the queue
+     */
     @Override
     public void updateInputs() {
     	this.handler.updateInputs();
