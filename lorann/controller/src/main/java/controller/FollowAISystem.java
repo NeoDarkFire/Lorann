@@ -68,23 +68,22 @@ public class FollowAISystem extends CustomSystem{
 				final int next_y = pos.pos.y + movement.getY();
 				// Get stuff potentially already there:
 				final ITile tile = level.getTileAt(next_x, next_y);
-				for (final Entity e2 : level.getEntitiesAt(next_x, next_y)) {
-					// Check if this tile is occupied:
-					if (tile.getSolidity() != TileSolidity.FREE
-					|| (e2 != null && e2.hasOne(SolidComponent.class, CollectibleComponent.class))) {
-						continue;
-					}
-					// The movement allows a kill:
-					else if (e2 != null && e2.has(KillableComponent.class)
-						 &&  e2.get(KillableComponent.class).weakness == DemonComponent.class) {
-						move.movement = movement;
-						break;
-					}
-					// The tile is free:
-					else {
-						move.movement = movement;
-						break;
-					}
+				final Entity e2 = level.getEntityAt(next_x, next_y);
+				// Check if this tile is occupied:
+				if (tile.getSolidity() != TileSolidity.FREE
+				|| (e2 != null && e2.hasOne(SolidComponent.class, CollectibleComponent.class))) {
+					continue;
+				}
+				// The movement allows a kill:
+				else if (e2 != null && e2.has(KillableComponent.class)
+					 &&  e2.get(KillableComponent.class).weakness == DemonComponent.class) {
+					move.movement = movement;
+					break;
+				}
+				// The tile is free:
+				else {
+					move.movement = movement;
+					break;
 				}
 			}
 		}
