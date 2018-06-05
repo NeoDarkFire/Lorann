@@ -14,14 +14,23 @@ import showboard.ISquare;
 /**
  * <h1>The Class Renderer allows to show the display.</h1>
  *
- * 
+ * @author aurel
  * @version 1.0
  */
 
 public class Renderer extends Observable implements Runnable{
 	
+	/**
+	 * Composition because we use the level in this class
+	 */
 	private ILevel level;
+	/**
+	 * Composition because we use the frame in this class
+	 */
 	private BoardFrame frame;
+	/**
+	 * Composition because we use the keyListener in this class
+	 */
 	private KeyListener keyListener;
 	
 	
