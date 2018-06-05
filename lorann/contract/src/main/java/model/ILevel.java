@@ -4,6 +4,10 @@ import java.util.List;
 
 import ecs.Entity;
 
+/**
+ * <h1>The Interface ILevel.</h1>
+ *
+ */
 public interface ILevel {
 	
 	public int getWidth();

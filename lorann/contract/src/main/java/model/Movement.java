@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.lang.Math;
 
+/**
+ * <h1>Describe the movement</h1>
+ * @author Razen
+ *
+ */
 public class Movement {
 	
 //----------------------ATTRIBUTES--------------------

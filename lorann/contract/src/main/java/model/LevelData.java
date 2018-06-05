@@ -6,16 +6,30 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * <h1>Combines the CellData and the MapData</h1>
+ *
+ */
 public class LevelData {
 
 	private List<CellData> grid;
 	private MapData map;
 	
+	/**
+	 * constructor to build the level from the datas
+	 * @param grid
+	 * @param map
+	 */
 	public LevelData(List<CellData> grid, MapData map) {
 		this.setMap(map);
 		this.setGrid(grid);
 	}
 	
+	/**
+	 * constructor to build the level from the file
+	 * @param file
+	 * @throws FileNotFoundException
+	 */
 	public LevelData(File file) throws FileNotFoundException {
 		List<CellData> cells = new ArrayList<>();
 		final Scanner sc = new Scanner(file);
