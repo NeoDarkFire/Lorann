@@ -14,6 +14,6 @@ public interface ILevel {
 	public void removeEntity(Entity entity);
 	public List<Entity> getEntities();
 	public int getID();
-	public List<Entity> getEntitiesAt(int x, int y);
+	public Entity getEntityAt(int x, int y);
 
 }

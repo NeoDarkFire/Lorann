@@ -62,16 +62,14 @@ public class CollisionSystem extends CustomSystem{
 			}
 		
 			// Colliding with entities
-			for (final Entity e2 : this.getEntitiesFor(e)) {
-				if ( !engine.hasEntity(e) ) 	return;
-				if ( !engine.hasEntity(e2) )	continue;
-				if ( e == e2 )					continue;
-				if ( this.collectSpell(e, e2) ) break;
-				if ( this.exitLevel(e, e2) )	break;
-				if ( this.collectItem(e, e2) )	break;
-				if ( this.killEntity(e, e2) )	break;
-				if ( this.checkCollision(e, e2) == CollisionType.BOUNCE) nOfBounce++; break;
-			}
+			final Entity e2 = this.getEntityFor(e);
+			if ( !engine.hasEntity(e) ) 	return;
+			if ( !engine.hasEntity(e2) || e == e2);
+			else if ( this.collectSpell(e, e2) );
+			else if ( this.exitLevel(e, e2) );
+			else if ( this.collectItem(e, e2) );
+			else if ( this.killEntity(e, e2) );
+			else if ( this.checkCollision(e, e2) == CollisionType.BOUNCE) nOfBounce++;
 			
 			if (nOfBounce > 1) {
 				move.movement.setDirection(Direction.NONE);
@@ -97,7 +95,7 @@ public class CollisionSystem extends CustomSystem{
 		return level.getTileAt(next_x, next_y);
 	}
 	
-	private List<Entity> getEntitiesFor(final Entity e) {
+	private Entity getEntityFor(final Entity e) {
 		// Get Level
 		final ILevel level = this.controller.getCurrentLevel();
 		// Get Components
@@ -107,7 +105,7 @@ public class CollisionSystem extends CustomSystem{
 		final int next_x = pos.pos.x + move.movement.getX();
 		final int next_y = pos.pos.y + move.movement.getY();
 		// Get the Entities
-		return level.getEntitiesAt(next_x, next_y);
+		return level.getEntityAt(next_x, next_y);
 	}
 	
 	private CollisionType checkCollision(final Entity e, final ITile tile) {
