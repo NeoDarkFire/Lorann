@@ -2,7 +2,6 @@ package controller;
 
 import ecs.Engine;
 import ecs.Entity;
-import model.ILevel;
 import model.components.*;
 
 public class ExitSystem extends CustomSystem {

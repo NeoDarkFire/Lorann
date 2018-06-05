@@ -2,14 +2,11 @@
 
 import java.sql.SQLException;
 import java.util.Collection;
-import java.util.List;
 
 import ecs.Engine;
 import ecs.Entity;
-import model.Direction;
 import model.ILevel;
 import model.IModel;
-import model.components.PlayerComponent;
 import view.IView;
 
 /**

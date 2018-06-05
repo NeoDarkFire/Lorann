@@ -24,6 +24,7 @@ public class TowerAISystem extends CustomSystem {
 		super();
 	}
 
+	// TODO: /!\ WARNING: update is the same as other AI Systems /!\
 	@Override
 	public void update(final Engine engine, final double dt) {
 		MoveComponent move;
@@ -33,12 +34,6 @@ public class TowerAISystem extends CustomSystem {
 		engine.getEntitiesWithComponent(PlayerComponent.class).toArray(targets); 
 		final Entity target = targets[0];
 		
-		int target_x = 0, target_y = 0;
-		if (target != null) {
-			target_x = target.get(PositionComponent.class).pos.x;
-			target_y = target.get(PositionComponent.class).pos.y;
-		}
-		
 		final ILevel level = this.controller.getCurrentLevel();
 		
 		for (final Entity e : this) {
@@ -47,9 +42,17 @@ public class TowerAISystem extends CustomSystem {
 			
 			// Reset the movement:
 			move.movement.setDirection(Direction.NONE);
+			
+			// Get the target position:
+			int target_x = 0, target_y = 0;
+			if (target != null) {
+				target_x = target.get(PositionComponent.class).pos.x - pos.pos.x;
+				target_y = target.get(PositionComponent.class).pos.y - pos.pos.y;
+			}
+			
 			// Get all the possible movement, sorted by priority:
-			final Movement[] moves = this.getMoveOrder(		target_x - pos.pos.x,
-															target_y - pos.pos.y	);
+			final Movement[] moves = this.getMoveOrder(target_x, target_y);
+			
 			// Try every movements:
 			for (final Movement movement : moves) {
 				// Get potential next position:
@@ -58,18 +61,17 @@ public class TowerAISystem extends CustomSystem {
 				// Get stuff potentially already there:
 				final ITile tile = level.getTileAt(next_x, next_y);
 				final Entity e2 = level.getEntityAt(next_x, next_y);
-				
-				// Check if this tile is occupied:
-				if (tile.getSolidity() != TileSolidity.FREE
-				|| (e2 != null && e2.hasOne(SolidComponent.class, CollectibleComponent.class))) {
-					continue;
-				}
 				// The movement allows a kill:
-				else if (e2 != null && e2.has(KillableComponent.class)
-					 &&  e2.get(KillableComponent.class).weakness == DemonComponent.class) {
+				if (e2 != null && e2.has(KillableComponent.class)
+				&&  e.has(e2.get(KillableComponent.class).weakness)) {
 					move.movement = movement;
 					break;
 				}
+				// Check if this tile is occupied:
+				else if (tile.getSolidity() != TileSolidity.FREE
+				|| (e2 != null && e2.hasOne(SolidComponent.class, CollectibleComponent.class))) {
+					continue;
+				} 
 				// The tile is free:
 				else {
 					move.movement = movement;
