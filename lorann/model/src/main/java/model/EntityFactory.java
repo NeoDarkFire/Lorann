@@ -140,9 +140,6 @@ public abstract class EntityFactory {
 		
 		SpellComponent spell = new SpellComponent();
 		
-		KillableComponent killable = new KillableComponent();
-		killable.weakness = DemonComponent.class;
-		
 		DrawableComponent drawable = new DrawableComponent();
 		
 		AnimationComponent animation = new AnimationComponent();
@@ -167,7 +164,6 @@ public abstract class EntityFactory {
 		e.attach(spell);
 		e.attach(pos);
 		e.attach(move);
-		e.attach(killable);
 		e.attach(drawable);
 		e.attach(animation);
 		e.attach(solid);

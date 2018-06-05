@@ -57,7 +57,7 @@ public class TowerAISystem extends CustomSystem {
 				final int next_y = pos.pos.y + movement.getY();
 				// Get stuff potentially already there:
 				final ITile tile = level.getTileAt(next_x, next_y);
-				final Entity e2 = level.getEntitiesAt(next_x, next_y).get(0);
+				final Entity e2 = level.getEntityAt(next_x, next_y);
 				
 				// Check if this tile is occupied:
 				if (tile.getSolidity() != TileSolidity.FREE

@@ -62,16 +62,14 @@ public class CollisionSystem extends CustomSystem{
 			}
 		
 			// Colliding with entities
-			for (final Entity e2 : this.getEntitiesFor(e)) {
-				if ( !engine.hasEntity(e) ) 	return;
-				if ( !engine.hasEntity(e2) )	continue;
-				if ( e == e2 )					continue;
-				if ( this.collectSpell(e, e2) ) break;
-				if ( this.exitLevel(e, e2) )	break;
-				if ( this.collectItem(e, e2) )	break;
-				if ( this.killEntity(e, e2) )	break;
-				if ( this.checkCollision(e, e2) == CollisionType.BOUNCE) nOfBounce++; break;
-			}
+			final Entity e2 = this.getEntityFor(e);
+			if ( !engine.hasEntity(e) ) 	return;
+			if ( !engine.hasEntity(e2) || e == e2);
+			else if ( this.collectSpell(e, e2) );
+			else if ( this.exitLevel(e, e2) );
+			else if ( this.collectItem(e, e2) );
+			else if ( this.killEntity(e, e2) );
+			else if ( this.checkCollision(e, e2) == CollisionType.BOUNCE) nOfBounce++;
 			
 			if (nOfBounce > 1) {
 				move.movement.setDirection(Direction.NONE);
@@ -97,7 +95,7 @@ public class CollisionSystem extends CustomSystem{
 		return level.getTileAt(next_x, next_y);
 	}
 	
-	private List<Entity> getEntitiesFor(final Entity e) {
+	private Entity getEntityFor(final Entity e) {
 		// Get Level
 		final ILevel level = this.controller.getCurrentLevel();
 		// Get Components
@@ -107,7 +105,7 @@ public class CollisionSystem extends CustomSystem{
 		final int next_x = pos.pos.x + move.movement.getX();
 		final int next_y = pos.pos.y + move.movement.getY();
 		// Get the Entities
-		return level.getEntitiesAt(next_x, next_y);
+		return level.getEntityAt(next_x, next_y);
 	}
 	
 	private CollisionType checkCollision(final Entity e, final ITile tile) {
@@ -119,7 +117,7 @@ public class CollisionSystem extends CustomSystem{
 	
 	private CollisionType checkCollision(final Entity e, final Entity e2) {
 		if (e2.has(SolidComponent.class)) {
-			java.lang.System.out.println("Collision between "+e+" & "+e2);
+			java.lang.System.out.println("Collision between " + e + " & " + e2);
 			return this.collide(e.get(SolidComponent.class), e.get(MoveComponent.class));
 		}
 		return null;
@@ -141,6 +139,11 @@ public class CollisionSystem extends CustomSystem{
 			e.destroy();
 			return true;
 		}
+		else if (e2.has(SpellComponent.class) && e.has(SpellCasterComponent.class)) {
+			java.lang.System.out.println("Collected spell " + e);
+			e2.destroy();
+			return true;
+		}
 		return false;
 	}
 	
@@ -150,15 +153,25 @@ public class CollisionSystem extends CustomSystem{
 			e2.destroy();
 			return true;
 		}
+		else if (e2.has(PlayerComponent.class) && e.has(ExitComponent.class) && !e.has(DemonComponent.class)) {
+			java.lang.System.out.println("Exit Level");
+			e.destroy();
+			return true;
+		}
 		return false;
 	}
 	
-	// TODO: add a CollecterComponent
-	// TODO: handle score
+	// TODO: Maybe add a CollecterComponent
+	// TODO: Maybe handle score
 	private boolean collectItem(Entity e, Entity e2) {
 		if (e.has(PlayerComponent.class) && e2.has(CollectibleComponent.class)) {
 			java.lang.System.out.println("Collected item " + e2);
 			e2.destroy();
+			return true;
+		}
+		else if (e2.has(PlayerComponent.class) && e.has(CollectibleComponent.class)) {
+			java.lang.System.out.println("Collected item " + e);
+			e.destroy();
 			return true;
 		}
 		return false;
@@ -167,12 +180,20 @@ public class CollisionSystem extends CustomSystem{
 	private boolean killEntity(Entity e, Entity e2) {
 		if (e2.has(KillableComponent.class) && e.has(e2.get(KillableComponent.class).weakness)) {
 			e2.destroy();
-			if (e.has(SpellComponent.class)) e.destroy();
+			java.lang.System.out.println("Killed entity " + e2);
+			if (e.has(SpellComponent.class)) {
+				e.destroy();
+				java.lang.System.out.println("Killed spell " + e);
+			}
 			return true;
 		}
 		else if (e.has(KillableComponent.class) && e2.has(e.get(KillableComponent.class).weakness)) {
 			e.destroy();
-			if (e2.has(SpellComponent.class)) e2.destroy();
+			java.lang.System.out.println("Killed entity " + e);
+			if (e2.has(SpellComponent.class)) {
+				e2.destroy();
+				java.lang.System.out.println("Killed spell " + e2);
+			}
 			return true;
 		}
 		return false;

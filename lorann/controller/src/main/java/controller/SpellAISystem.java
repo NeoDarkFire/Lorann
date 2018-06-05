@@ -49,7 +49,6 @@ public class SpellAISystem extends CustomSystem{
 					final Point dest = new Point(	targetPos.pos.x - pos.pos.x,
 													targetPos.pos.y - pos.pos.y		);
 					e.get(MoveComponent.class).movement.setDirection(dest);
-					java.lang.System.out.println(e.get(MoveComponent.class).movement.getDirection());
 				}
 			}
 		}
