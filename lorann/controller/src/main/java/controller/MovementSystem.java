@@ -5,6 +5,7 @@ import ecs.Entity;
 import model.components.MoveComponent;
 import model.components.PositionComponent;
 
+@Deprecated
 public class MovementSystem extends CustomSystem{
 	{
 		targets.add(MoveComponent.class);
