@@ -44,10 +44,7 @@ public class Entity {
 	
 	/**
 	 * Creates an Entity with one to many Components.
-<<<<<<< HEAD
 	 * @param comps Components.
-=======
->>>>>>> branch 'ecs' of https://github.com/NeoDarkFire/Lorann.git
 	 */
 	
 	public Entity(final Component... comps) {
@@ -57,10 +54,7 @@ public class Entity {
 	
 	/**
 	 * Creates an Entity with a Collection of Components.
-<<<<<<< HEAD
 	 * @param comps A Collection of Component.
-=======
->>>>>>> branch 'ecs' of https://github.com/NeoDarkFire/Lorann.git
 	 */
 	
 	public Entity(final Collection<Component> comps) {
@@ -97,7 +91,8 @@ public class Entity {
 	/**
 	 * Destroys the Entity.
 	 * If the Entity has components, destroy them.
-	 * If the Entity is registered to an Engine, tells it to discard the Entity. 
+	 * If the Entity is registered to an Engine, tells it to discard the Entity.
+	 * @param <C> A Component Class. 
 	 */
 	public <C extends Component> void destroy() {
 		if (this.engine != null) {
@@ -186,6 +181,7 @@ public class Entity {
 	/**
 	 * Detaches one to many Component from the Entity.
 	 * @param compClasses The classes of the Components to detach.
+	 * @param <C> A Component Class.
 	 */
 	@SafeVarargs
 	final public <C extends Component> void detach(final Class<C>... compClasses) {
@@ -197,6 +193,7 @@ public class Entity {
 	/**
 	 * Detaches a Collection of Component from the Entity.
 	 * @param compClasses A Collection of the class of the Components to detach.
+	 * @param <C> A Component Class.
 	 */
 	public <C extends Component> void detach(final Collection<Class<C>> compClasses) {
 		for (final Class<C> compClass : compClasses) {

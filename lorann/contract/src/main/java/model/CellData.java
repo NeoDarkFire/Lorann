@@ -36,11 +36,11 @@ public class CellData {
 //----------------------METHODS---------------------
 	/**
 	 * constructor
-	 * @param id
-	 * @param x
-	 * @param y
-	 * @param symbol
-	 * @param mapID
+	 * @param id The ID of the cell.
+	 * @param x The X position of the cell.
+	 * @param y The Y position of the cell.
+	 * @param symbol The symbol of the cell.
+	 * @param mapID The ID of the map containing the cell.
 	 */
 	public CellData(int id, int x, int y, char symbol, int mapID) {
 		this.setID(id);

@@ -16,9 +16,9 @@ public class LevelData {
 	private MapData map;
 	
 	/**
-	 * constructor to build the level from the datas
-	 * @param grid
-	 * @param map
+	 * constructor to build the level from the data.
+	 * @param grid A List of CellData.
+	 * @param map A MapData.
 	 */
 	public LevelData(List<CellData> grid, MapData map) {
 		this.setMap(map);
@@ -27,8 +27,8 @@ public class LevelData {
 	
 	/**
 	 * constructor to build the level from the file
-	 * @param file
-	 * @throws FileNotFoundException
+	 * @param file A level file.
+	 * @throws FileNotFoundException If the File is not found.
 	 */
 	public LevelData(File file) throws FileNotFoundException {
 		List<CellData> cells = new ArrayList<>();

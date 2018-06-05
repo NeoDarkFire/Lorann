@@ -146,7 +146,7 @@ public final class Engine {
 	
 	/**
 	 * Checks if an Entity is in the Engine. 
-	 * @param id The unique ID of the Entity.
+	 * @param entity The Entity.
 	 * @return An Entity.
 	 */
 	final public boolean hasEntity(final Entity entity) {

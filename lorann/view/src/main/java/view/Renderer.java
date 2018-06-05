@@ -39,7 +39,7 @@ public class Renderer extends Observable implements Runnable {
 	/**
 	 * Set up the level
 	 * 
-	 * @param level
+	 * @param level The Level.
 	 * 
 	 */
 	
@@ -66,7 +66,7 @@ public class Renderer extends Observable implements Runnable {
 	/**
 	 * Add the sprite
 	 * 
-	 * @param sprite
+	 * @param sprite The Sprite.
 	 */
 	
 	public void addSprite(Sprite sprite) {
@@ -77,7 +77,7 @@ public class Renderer extends Observable implements Runnable {
 	/**
 	 * Remove the sprite
 	 * 
-	 * @param sprite
+	 * @param sprite The Sprite.
 	 * 
 	 */
 	public void removeSprite(Sprite sprite) {

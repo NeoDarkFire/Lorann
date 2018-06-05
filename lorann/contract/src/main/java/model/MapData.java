@@ -17,9 +17,9 @@ public class MapData {
 //----------------------METHODS---------------------	
 	/**
 	 * constructor
-	 * @param id
-	 * @param width
-	 * @param height
+	 * @param id The ID of the map.
+	 * @param width The width of the map.
+	 * @param height The height of the map.
 	 */
 	public MapData(int id, int width, int height) {
 		this.setID(id);

@@ -71,10 +71,6 @@ public class ControllerFacade implements IController {
 
     /**
      * Start.
-     * @throws InterruptedException 
-     *
-     * @throws SQLException
-     *             the SQL exception
      */
     @Override
     public void start() {

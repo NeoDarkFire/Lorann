@@ -31,7 +31,7 @@ public class MKeyListener extends KeyAdapter {
 	/**
 	 * Used when a key is pressed
 	 * 
-	 * @param the keyEvent
+	 * @param e The KeyEvent.
 	 * 
 	 */
 	public void keyPressed(KeyEvent e) {
@@ -43,7 +43,7 @@ public class MKeyListener extends KeyAdapter {
 	/**
 	 * Used when a key is released
 	 * 
-	 * @param the keyEvent
+	 * @param e The KeyEvent.
 	 * 
 	 */
 	public void keyReleased(KeyEvent e) {

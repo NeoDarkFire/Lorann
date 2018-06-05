@@ -104,11 +104,9 @@ public class UserInputHandler implements InputHandler{
 	
 	
 	/**
-	 * If boolean of isPressed is true, execute press
+	 * Reset the queue and add a press event.
 	 * 
-	 * @param input Action to check.
-	 * 
-	 * @return Is the action pressed?
+	 * @param input Action to press.
 	 */
 	
 	public void press(Action input) {
@@ -118,11 +116,9 @@ public class UserInputHandler implements InputHandler{
 	
 	
 	/**
-	 * If boolean of isReleased is true, execute released
+	 * Add a release event to the queue.
 	 * 
-	 * @param input Action to check.
-	 * 
-	 * @return Is the action released?
+	 * @param input Action to release.
 	 */
 	public void release(Action input) {
 		this.llist.get(input).addLast(false);

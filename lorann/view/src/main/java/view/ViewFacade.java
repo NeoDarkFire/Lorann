@@ -52,7 +52,7 @@ public class ViewFacade implements IView {
     /**
 	 * Add the Sprite
 	 * 
-	 * @param entity
+	 * @param entity The Entity.
 	 * 
 	 */
     @Override
@@ -64,7 +64,7 @@ public class ViewFacade implements IView {
     /**
 	 * Remove the Sprite
 	 * 
-	 * @param entity
+	 * @param entity The Entity.
 	 * 
 	 */
     @Override
@@ -78,7 +78,7 @@ public class ViewFacade implements IView {
     /**
 	 * Displays the level
 	 * 
-	 * @param level
+	 * @param level The Level.
 	 * 
 	 */
     @Override
